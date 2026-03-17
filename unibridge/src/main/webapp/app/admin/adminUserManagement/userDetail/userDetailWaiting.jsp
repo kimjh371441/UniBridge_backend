@@ -18,9 +18,7 @@
       <!-- 왼쪽: 프로필 이미지 + 설문조사 확인 -->
       <div class="profile-col">
         <div class="profile-avatar">
-          <div class="profile-avatar">
-            <img src="${pageContext.request.contextPath}/assets/img/admin/유저 아이콘.png" alt="유저 아이콘" style="width:90px;height:90px;object-fit:contain;" />
-          </div>
+          <img src="${pageContext.request.contextPath}/assets/img/admin/유저 아이콘.png" alt="유저 아이콘"" />
         </div>
         <button class="btn-survey" id="btnSurvey">설문조사 확인</button>
       </div>
