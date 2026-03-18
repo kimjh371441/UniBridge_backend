@@ -8,7 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
-import com.unibridge.app.mypage.surveyMentee.controller.SurveyMenteeOkController;
+import com.unibridge.app.mypage.surveyMentee.controller.SurveyMenteeController;
+
 
 public class MenteeFrontController implements Execute {
 	Result outResult = new Result();
@@ -19,10 +20,10 @@ public class MenteeFrontController implements Execute {
 		String requestURI = request.getRequestURI();
 		String target = extractTargetPath(requestURI);
 		switch (target) {
-		case "surveyMenteeOk.my":
-		case "/surveyMenteeOk.my":
+		case "survey.my":
+		case "/survey.my":
 			System.out.println("멘티 설문 등록 요청 수신");
-			outResult = new SurveyMenteeOkController().execute(request, response);
+			outResult = new SurveyMenteeController().execute(request, response);
 		default:
 			break;
 		}
