@@ -24,6 +24,10 @@ public class MenteeFrontController implements Execute {
 		case "/myPage/delete.my":
 			this.outResult = new MenteeDeleteController().execute(request, response);
 			break;
+		case "surveyMenteeOk.my":
+		case "/surveyMenteeOk.my":
+			System.out.println("멘티 설문 등록 요청 수신");
+			outResult = new SurveyMenteeOkController().execute(request, response);
 		default:
 			break;
 		}
