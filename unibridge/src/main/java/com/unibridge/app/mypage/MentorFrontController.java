@@ -10,7 +10,8 @@ import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.mypage.delete.controller.MentorDeleteController;
 import com.unibridge.app.mypage.entrypoint.controller.MentorController;
-import com.unibridge.app.mypage.surveyMentor.controller.SurveyMentorOkController;
+import com.unibridge.app.mypage.surveyMentor.controller.SurveyMentorController;
+
 
 public class MentorFrontController implements Execute {
 	Result outResult = new Result();
@@ -29,10 +30,10 @@ public class MentorFrontController implements Execute {
 		case "/delete.my":
 			this.outResult = new MentorDeleteController().execute(request, response);
 			break;
-		case "surveyMentorOk.my":
-		case "/surveyMentorOk.my":
+		case "survey.my":
+		case "/survey.my":
 			System.out.println("멘토 설문 등록 요청 수신");
-			this.outResult = new SurveyMentorOkController().execute(request, response);
+			this.outResult = new SurveyMentorController().execute(request, response);
 			break;
 		default:
 			break;
