@@ -18,7 +18,7 @@
   const roleMap = {
     mentor: { label: '멘토', cls: 'mentoRoleBadge' },
     mentee: { label: '멘티', cls: 'mentiRoleBadge' },
-    pending: { label: '미정', cls: 'pending' },
+    nodecided: { label: '미정', cls: 'nodecided' },
   };
 
   let authState = {
@@ -43,9 +43,9 @@
 	
     const authSection = !authState.loggedIn ? `
       <div class="headerAuthGroup">
-        <a href="${base}/app/user/siginUp/terms.jsp" class="headerBtnText">회원가입</a>
+        <a href="${base}/app/user/siginup/terms.jsp" class="headerBtnText">회원가입</a>
         <div class="headerDivider"></div>
-        <a href="${base}/app/user/siginIn/login.jsp" class="headerBtnSignIn">로그인</a>
+        <a href="${base}/app/user/siginin/signin.jsp" class="headerBtnSignIn">로그인</a>
       </div>` : `
       <div class="headerAuthGroup">
         <div class="userInfoWrap">
@@ -79,7 +79,7 @@
 
       // 로그아웃 버튼 이벤트 리스너
       const logoutBtn = document.getElementById('headerBtnLogout');
-      if (logoutBtn) {
+      /*if (logoutBtn) {
         logoutBtn.addEventListener('click', (e) => {
           e.preventDefault();
           
@@ -90,7 +90,14 @@
           renderHeader(); // 변경된 상태로 화면 다시 그리기
           // --- 수정 부분 끝 ---
         });
-      }
+      }*/
+	  if (logoutBtn) {
+	      logoutBtn.addEventListener('click', (e) => {
+	          // e.preventDefault(); 제거하여 href 경로로 이동 허용
+	          alert('로그아웃 되었습니다.');
+	      });
+	  }
+	  
     }
   }
 

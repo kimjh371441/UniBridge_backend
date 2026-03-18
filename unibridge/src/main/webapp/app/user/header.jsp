@@ -58,14 +58,14 @@
                                 <span class="userRoleBadge mentiRoleBadge">멘티</span>
                             </c:when>
                             <c:otherwise>
-                                <span class="userRoleBadge pending">미정</span>
+                                <span class="userRoleBadge nodecided">미정</span>
                             </c:otherwise>
                         </c:choose>
                     </div>
                     <div class="headerDivider"></div>
-                    <a href="${pageContext.request.contextPath}/user/mentee/mypage" class="headerBtnText">마이페이지</a>
+                    <a href="${pageContext.request.contextPath}/app/user/mentee/mypage" class="headerBtnText">마이페이지</a>
                     <div class="headerDivider"></div>
-                    <a href="${pageContext.request.contextPath}/user/signIn/login.jsp" class="headerBtnText logout">로그아웃</a>
+                    <a href="${pageContext.request.contextPath}/logout.head" class="headerBtnText logout">로그아웃</a>
                 </div>
             </c:otherwise>
         </c:choose>

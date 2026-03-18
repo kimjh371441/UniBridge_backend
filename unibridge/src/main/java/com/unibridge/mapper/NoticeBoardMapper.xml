@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<!-- 게시글 총 개수 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(noticeboard_number)
+		FROM UB_NOTICEBOARD
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="updateReadCount" parameterType="int">
+		UPDATE UB_NOTICEBOARD
+		SET board_click = board_click + 1
+		WHERE noticeboard_number = #{noticeBoardNumber}
+	</update>
+
+	<!-- 게시글 추가 -->
+<!-- 	<insert id="insert" parameterType="BoardDTO">
+		INSERT INTO UB_NOTICEBOARD(noticenoticeboard_number, board_title, board_content, member_number)
+		VALUSE(seq_board.nextval, #{boardTitle}, #{boardContent}, #{memberNumber})
+	</insert>
+	방금 생성된 시퀀스 값 가져오기
+	<select id = "getCurrentBoardNumber" resultType="int">
+		SELECT seq_board.currval
+		FROM DUAL
+	</select> -->
+	
+	<!-- 게시글 상세(1건 조회) -->
+	<select id="select" parameterType="int" resultType="noticeBoardListDTO">
+		<![CDATA[
+			SELECT b.noticeboard_number, b.board_title,
+			 	b.board_content, b.board_date, b.board_click
+			FROM UB_NOTICEBOARD b
+			WHERE b.noticeboard_number = #{noticeBoardNumber}
+		]]>
+	</select>
+	
+	<!-- 전체 게시글 조회 -->
+	<select id="selectAll" resultType="noticeBoardListDTO">
+	<![CDATA[
+		SELECT * FROM (
+			SELECT ROWNUM AS rnum, subquery.*
+			FROM (
+				SELECT  b.noticeboard_number, b.board_title, 
+					b.board_content, b.board_date, b.board_click
+				FROM UB_NOTICEBOARD b
+				ORDER BY b.board_date DESC
+			) subquery
+		) WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	]]>
+	</select>
+</mapper>
+
+
+
+
+
+
+
