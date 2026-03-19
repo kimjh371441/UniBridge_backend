@@ -32,14 +32,16 @@ public class AdminLoginOkController implements Execute{
 		System.out.println("ID : " + adminDTO.getAdminId() + "PW : " + adminDTO.getAdminPw());
 		 
 		adminNumber = adminDAO.login(adminDTO);
-		
+		System.out.println(adminNumber + " AdminLiginOkControllerㅇ넘버값확인");
 		if(adminNumber != -1) {
-			path = "/app/admin/adminMain/main.admin";
+			path = request.getContextPath()+"/app/admin/adminMain/main.admin";
 			session.setAttribute("adminNumber", adminNumber);
 			System.out.println("세션 : " +  session.getAttribute("adminNumber"));			
 		}else {
-			path = "/app/admin/adminLogin/login.admin?login=fail";
+			path = request.getContextPath()+"/app/admin/adminLogin/login.admin?login=fail";
 		}
+		
+		System.out.println("path : " + path);
 		
 		result.setRedirect(true); 
 		result.setPath(path);

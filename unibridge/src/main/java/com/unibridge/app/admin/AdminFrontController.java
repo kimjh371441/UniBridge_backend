@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.unibridge.app.Result;
 import com.unibridge.app.admin.controller.AdminLoginController;
 import com.unibridge.app.admin.controller.AdminLoginOkController;
+import com.unibridge.app.admin.controller.AdminMainController;
 import com.unibridge.app.admin.controller.AdminReportController;
 import com.unibridge.app.admin.controller.AdminUserMMController;
 
@@ -49,7 +50,13 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("로그인 확인 완료");
 			break;
 			
-			
+	    case "main.admin":
+	    case "/main.admin":
+	         System.out.println("관리자 메인 페이지 화면 출력 준비");
+	         result = new AdminMainController().execute(request, response);
+	         System.out.println("관리자 메인 페이지 화면 출력 완료");
+	         break;
+		
 		case  "report.admin":
 		case "/report.admin":
 			result = new AdminReportController().execute(request, response);
@@ -59,6 +66,8 @@ public class AdminFrontController extends HttpServlet {
 		case "/userMM.admin":
 			result = new AdminUserMMController().execute(request, response);
 			break;
+			
+			
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND, "요청한 기능을 사용할 수 없습니다.");
 			return;
