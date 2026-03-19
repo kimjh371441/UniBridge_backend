@@ -28,6 +28,8 @@
       <typeAlias type="com.unibridge.app.noticeBoard.dto.NoticeBoardDTO"             alias="NoticeBoardDTO"    />
       <typeAlias type="com.unibridge.app.noticeBoard.dto.NoticeBoardListDTO"         alias="NoticeBoardListDTO"/>
       <typeAlias type="com.unibridge.app.mypage.mentoring.dto.MentoringDTO" alias="MentoringDTO"></typeAlias>
+      <typeAlias type="com.unibridge.app.admin.dto.AdminDTO" alias="AdminDTO"></typeAlias>
+      <typeAlias type="com.unibridge.app.admin.dto.AdMainDTO" alias="AdMainDTO"></typeAlias>
       <typeAlias type="com.unibridge.app.learningReport.dto.LearningReportDTO" alias="LearningReportDTO"></typeAlias>
    </typeAliases>
 
@@ -54,6 +56,7 @@
       <mapper resource="com/unibridge/mapper/fileMapper.xml" />
       <mapper resource="com/unibridge/mapper/mentoringMapper.xml" />
       <mapper resource="com/unibridge/mapper/mainMapper.xml"/>
+      <mapper resource="com/unibridge/mapper/AdminMapper.xml"/>
       <mapper resource="com/unibridge/mapper/NoticeBoardMapper.xml" />
    </mappers>
    
