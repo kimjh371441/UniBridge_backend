@@ -39,24 +39,24 @@
                 <div class="modifyForm">
                     <div class="inputGroup">
                         <label>이름</label>
-                        <label>홍길동</label>
+                        <label>${member.MEMBER_NAME}</label>
                         <div class="spacer"></div>
                         <div class="spacer"></div>
                     </div>
     
                     <div class="inputGroup">
                         <label>아이디</label>
-                        <label>hongdong11</label>
+                        <label>${member.MEMBER_ID}</label>
                         <div class="spacer"></div>
                         <div class="spacer"></div>
                     </div>
 
                     <div class="inputGroup">
                         <label>닉네임</label>
-                        <input type="text" class="userInput">
-                        <button class="duplication">중복확인</button>
-                        <button class="change">변경</button>
-                        <div class="errorMsg"></div>
+                        <input type="text" class="userInput" id="nickInput" value="${member.MEMBER_NICKNAME}">
+                        <button class="duplication" id="nickCheckBtn">중복확인</button>
+            			<button class="change" id="nickChangeBtn">변경</button>
+            			<div class="errorMsg" id="nickError"></div>
                     </div>
 
                     <div class="inputGroup">
@@ -76,34 +76,34 @@
 
                     <div class="inputGroup">
                         <label>전화번호</label>
-                        <input type="text" class="userInput">
-                        <button class="authBtn">인증번호전송</button>
+                        <input type="text" class="userInput" id="phoneInput" value="${member.MEMBER_PHONE}">
+            			<button class="authBtn" id="sendSmsBtn">인증번호전송</button>
                         <div class="spacer2"></div>
-                        <div class="errorMsg"></div>
+                        <div class="errorMsg" id="phoneError"></div>
                     </div>
 
                     <div class="inputGroup">
                         <label>인증번호</label>
-                        <input type="text" class="userInput">
-                        <button class="duplication">확인</button>
-                        <button class="change">전화번호변경</button>
-                        <div class="errorMsg"></div>
+                        <input type="text" class="userInput" id="authCodeInput">
+			            <button class="duplication" id="authConfirmBtn">확인</button>
+			            <button class="change" id="phoneChangeBtn">전화번호변경</button>
+			            <div class="errorMsg" id="authError"></div>
                     </div>
 
                     <div class="inputGroup">
                         <label>성별</label>
                         <div class="radioGroup">
-                            <span class="radioItem">
-                                <span>남성</span> <input type="radio" value="m" name="role" class="radioUserType"> 
-                            </span>
-                            <span class="radioItem">
-                                <span>여성</span> <input type="radio" value="f" name="role" class="radioUserType"> 
-                            </span>
-                            <span class="radioItem">
-                                <span>선택안함</span> <input type="radio" value="none" name="role" class="radioUserType" checked> 
-                            </span>
-                        </div>
-                        <button class="change">변경</button>
+			                <span class="radioItem">
+			                    <span>남성</span> <input type="radio" value="M" name="gender" class="radioUserType" ${member.MEMBER_GENDER == 'M' ? 'checked' : ''}> 
+			                </span>
+			                <span class="radioItem">
+			                    <span>여성</span> <input type="radio" value="W" name="gender" class="radioUserType" ${member.MEMBER_GENDER == 'W' ? 'checked' : ''}> 
+			                </span>
+			                <span class="radioItem">
+			                    <span>선택안함</span> <input type="radio" value="N" name="gender" class="radioUserType" ${member.MEMBER_GENDER == 'N' ? 'checked' : ''}> 
+			                </span>
+			            </div>
+                        <button class="change" id="genderChangeBtn">변경</button>
                     </div>
                 </div>
             </div>

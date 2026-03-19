@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 
-public class MatchingController implements Execute {
+public class MentorMatchingController implements Execute {
 
     private Result outResult = new Result();
 
