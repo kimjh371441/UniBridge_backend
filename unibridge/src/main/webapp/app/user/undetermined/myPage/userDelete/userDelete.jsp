@@ -42,7 +42,7 @@
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>아이디</label>
-                            <input type="text" id="userId" class="userInput">
+                            <input type="text" id="userId" name="memberId" class="userInput">
                             <div class="spacer"></div>
                         </div>
                         <div class="errorMsg" id="loginError"></div>
@@ -51,7 +51,7 @@
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>비밀번호</label>
-                            <input type="password" id="userPw" class="userInput">
+                            <input type="password" id="userPw" name="memberPw" class="userInput">
                             <div class="spacer"></div>
                         </div>
                         <div class="spacer" id="space"></div>
@@ -69,7 +69,7 @@
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>인증번호</label>
-                            <input type="text" id="authCode" class="userInput">
+                            <input type="text" id="authCode" name="authNumber" class="userInput">
                             <button type="button" class="duplication" id="verifySms">인증 확인</button>
                         </div>
                         <div class="errorMsg" id="authError"></div>

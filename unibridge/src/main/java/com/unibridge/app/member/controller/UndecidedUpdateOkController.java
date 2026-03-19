@@ -12,13 +12,15 @@ import javax.servlet.http.HttpSession;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.member.dao.MemberDAO;
+import com.unibridge.app.member.dto.MemberDTO;
 
 public class UndecidedUpdateOkController implements Execute {
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Result result = new Result();
         HttpSession session = request.getSession();
-        Integer memberNumber = (Integer) session.getAttribute("memberNumber");
+		MemberDTO memberNumber = (MemberDTO) session.getAttribute("loginUser");
+	    System.out.println("MentorMange컨트롤러 : " + memberNumber.getMemberNumber());
 
         // 1. 파라미터 수집
         String nickname = request.getParameter("memberNickname");

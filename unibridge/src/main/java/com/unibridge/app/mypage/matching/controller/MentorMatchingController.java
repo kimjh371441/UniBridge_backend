@@ -40,7 +40,7 @@ public class MentorMatchingController implements Execute {
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
 
-        String path = "/app/user/undetermined/myPage/userMatching/userMatching.jsp"; // 기본값
+        String path = "/app/user/mentee/myPage/userMatching/userMatching.jsp"; // 기본값
 
         if ("mentor".equals(role)) {
             path = "/app/user/mentor/myPage/userMatching/userMatching.jsp";

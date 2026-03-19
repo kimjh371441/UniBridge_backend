@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <form method="post" action="${pageContext.request.contextPath}/auth/undecided/myPage.my">
+            <form method="post" action="${pageContext.request.contextPath}/mvc/auth/undecided/verify.my">
 			    <button type="submit" class="userModifyBtn">수정</button>
 			</form>
         </main>

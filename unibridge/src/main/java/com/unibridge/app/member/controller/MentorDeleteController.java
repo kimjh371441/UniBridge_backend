@@ -53,14 +53,6 @@ public class MentorDeleteController implements Execute{
         HttpSession session = request.getSession();
         Object memberNumObj = session.getAttribute("memberNumber");
 
-//        if (memberNumObj == null) {
-//            System.out.println("[ERROR] 로그인 안됨");
-//
-//            outResult.setRedirect(true);
-//            outResult.setPath(request.getContextPath() + "/member/signin.mem");
-//            return;
-//        }
-
         int memberNumber = (int) memberNumObj;
 
         // DTO에 값 세팅

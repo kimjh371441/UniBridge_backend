@@ -48,32 +48,25 @@ public class MenteeDeleteController implements Execute{
 
     	System.out.println("[DeleteController] POST - 회원 탈퇴 진행");
 
-        HttpSession session = request.getSession();
-        Object memberNumObj = session.getAttribute("memberNumber");
+    	HttpSession session = request.getSession();
+		MemberDTO memberNumber = (MemberDTO) session.getAttribute("loginUser");
+	    System.out.println("MenteeMange컨트롤러 : " + memberNumber.getMemberNumber());
 
-//        if (memberNumObj == null) {
-//            System.out.println("[ERROR] 로그인 안됨");
-//
-//            outResult.setRedirect(true);
-//            outResult.setPath(request.getContextPath() + "/member/signin.mem");
-//            return;
-//        }
-
-        int memberNumber = (int) memberNumObj;
+//        int memberNumber = (int) memberNumObj;
 
         // DTO에 값 세팅
-        MemberDTO memberDTO = new MemberDTO();
-        memberDTO.setMemberId(request.getParameter("userId"));
-        memberDTO.setMemberPw(request.getParameter("userPw"));
-        memberDTO.setMemberPhone(request.getParameter("userPhone"));
-
-        System.out.println("아이디: " + memberDTO.getMemberId());
-        System.out.println("전화번호: " + memberDTO.getMemberPhone());
-
+//        MemberDTO memberDTO = new MemberDTO();
+//        memberDTO.setMemberId(request.getParameter("userId"));
+//        memberDTO.setMemberPw(request.getParameter("userPw"));
+//        memberDTO.setMemberPhone(request.getParameter("userPhone"));
+//
+//        System.out.println("아이디: " + memberDTO.getMemberId());
+//        System.out.println("전화번호: " + memberDTO.getMemberPhone());
+//
         MemberDAO memberDAO = new MemberDAO();
 
         // 검증
-        boolean isValid = memberDAO.checkMember(memberDTO);
+        boolean isValid = memberDAO.checkMember(memberNumber);
 
         if (!isValid) {
             System.out.println("[ERROR] 회원 정보 불일치");
@@ -85,7 +78,7 @@ public class MenteeDeleteController implements Execute{
         }
 
         // 탈퇴 처리
-        memberDAO.deleteMember(memberNumber);
+        memberDAO.deleteMember(memberNumber.getMemberNumber());
 
         // 세션 제거
         session.invalidate();

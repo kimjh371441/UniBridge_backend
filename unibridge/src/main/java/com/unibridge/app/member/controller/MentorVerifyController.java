@@ -16,6 +16,8 @@ public class MentorVerifyController implements Execute{
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+    	
+    	System.out.println("===MentorVerifyController===");
 
         String method = request.getMethod().toUpperCase();
 
@@ -32,7 +34,9 @@ public class MentorVerifyController implements Execute{
     }
 
 	private void doGet(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+		
+		outResult.setPath("/app/user/mentor/myPage/userManage/userModifyCheck.jsp");
+	    outResult.setRedirect(false);
 		
 	}
 

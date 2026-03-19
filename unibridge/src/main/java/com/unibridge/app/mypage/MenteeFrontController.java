@@ -10,6 +10,7 @@ import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.member.controller.MenteeDeleteController;
 import com.unibridge.app.member.controller.MenteeMangeController;
+import com.unibridge.app.member.controller.MatchingController;
 import com.unibridge.app.member.controller.MenteeUpdateOkController;
 import com.unibridge.app.member.controller.MenteeVerifyController;
 import com.unibridge.app.mypage.matching.controller.MentorMatchingController;
@@ -64,7 +65,7 @@ public class MenteeFrontController implements Execute {
 				break;
 			case "matching.my": // 매칭정보
 				System.out.println("[Log] 결과: MatchingController 실행 시도...");
-				this.outResult = new MentorMatchingController().execute(request, response);
+				this.outResult = new MatchingController().execute(request, response);
 				System.out.println("[Log] 결과: MatchingController 실행 완료!");
 				break;
 			case "log.my": //결제정보

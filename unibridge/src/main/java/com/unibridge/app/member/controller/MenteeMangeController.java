@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.member.dao.MemberDAO;
+import com.unibridge.app.member.dto.MemberDTO;
 
 public class MenteeMangeController implements Execute {
 
@@ -19,7 +20,7 @@ public class MenteeMangeController implements Execute {
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-		System.out.println("---------------execute메소드실행-------------");
+		System.out.println("--------------MenteeMangeController-------------");
 
         String method = request.getMethod().toUpperCase();
 
@@ -36,23 +37,17 @@ public class MenteeMangeController implements Execute {
     }
 
 	private void doGet(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("---------------doGet메소드실행-------------");
+		
+		System.out.println("멘토/멘티 -- 매칭 정보 출력");
+		
 		HttpSession session = request.getSession();
-	    Integer memberNumber = (Integer) session.getAttribute("memberNumber");
+		MemberDTO memberNumber = (MemberDTO) session.getAttribute("loginUser");
+	    System.out.println("MenteeMange컨트롤러 : " + memberNumber.getMemberNumber());
 
-	    //임시 처리 테스트
-//	    memberNumber = 20;
-	    
-	    // 로그인 체크
-//	    if (memberNumber == null) {
-//	        outResult.setPath("/app/user/signin/signin.jsp");
-//	        outResult.setRedirect(true); // redirect 처리
-//	        return;
-//	    }
 
 	    // DAO로 회원정보 조회
 	    MemberDAO memberDAO = new MemberDAO();
-	    Map<String, Object> member = memberDAO.selectMember(memberNumber);
+	    Map<String, Object> member = memberDAO.selectMember(memberNumber.getMemberNumber());
 	    System.out.println("DB에서 가져온 데이터: " + member.toString()); // 여기서 Key 이름을 확인!
 
 	    request.setAttribute("member", member);
@@ -60,14 +55,17 @@ public class MenteeMangeController implements Execute {
 	    // outResult로 forward 설정
 	    outResult.setPath("/app/user/mentee/myPage/myPage.jsp");
 	    outResult.setRedirect(false); // forward 처리
+	    
+	    System.out.println("request.getContextPath() :" + request.getContextPath());
 		
 	}
 
 	private void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
 		// 수정 페이지로 이동
-	    outResult.setPath("/app/user/mentee/myPage/userManage/userModifyCheck.jsp");
-	    outResult.setRedirect(false); // forward
+		outResult.setPath(request.getContextPath()+"/auth/mentee/verify.my"); // 컨텍스트 패스 없이 시도 (FrontController가 처리하도록)
+	    outResult.setRedirect(true);
+		System.out.println("인증 페이지 이동");
 		
 	}
 
