@@ -40,6 +40,8 @@
       <typeAlias type="com.unibridge.app.admin.dto.AdMainDTO" alias="AdMainDTO"></typeAlias>
       <typeAlias type="com.unibridge.app.admin.dto.AdMenteeBoardListDTO" alias="AdMenteeBoardListDTO"></typeAlias>
       <typeAlias type="com.unibridge.app.admin.dto.AdMentorBoardListDTO" alias="AdMentorBoardListDTO"></typeAlias>
+      <typeAlias type="com.unibridge.app.admin.dto.AdMenteeBoardDTO" alias="AdMenteeBoardDTO"></typeAlias>
+      <typeAlias type="com.unibridge.app.admin.dto.AdMentorBoardDTO" alias="AdMentorBoardDTO"></typeAlias>
 
 
       

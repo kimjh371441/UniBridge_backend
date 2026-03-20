@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.unibridge.app.admin.dto.AdMenteeBoardDTO;
 import com.unibridge.app.admin.dto.AdMenteeBoardListDTO;
 import com.unibridge.config.MyBatisConfig;
 
@@ -44,12 +45,14 @@ public class AdMenteeBoardDAO {
 			return list;
 		}
 		
-		//멘티 게시판 조회수
-		public void menteeUpdateReadCount(int boardNumber) {
-			System.out.println("조회수 업데이트 실행");
-			int result = sqlSession.update("admin.menteeUpdateReadCount", boardNumber);
-			System.out.println("조회수 업데이트 완료" + result);
+
+		//멘티 게시판 상세 보기
+		public AdMenteeBoardDTO selectPage(int boardNumber) {
+			System.out.println("게시글 조회");
+			AdMenteeBoardDTO mentee = sqlSession.selectOne("admin.menteeSelectOne",boardNumber);
+			return mentee;
 		}
+		
 		
 		
 }

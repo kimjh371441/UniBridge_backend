@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.unibridge.app.Result;
+
 import com.unibridge.app.admin.controller.AdminLoginController;
 import com.unibridge.app.admin.controller.AdminLoginOkController;
 import com.unibridge.app.admin.controller.AdminMainController;
 import com.unibridge.app.admin.controller.AdminMenteeBoardController;
+import com.unibridge.app.admin.controller.AdminMenteeBoardDetailController;
 import com.unibridge.app.admin.controller.AdminMentorBoardController;
 import com.unibridge.app.admin.controller.AdminReportController;
 import com.unibridge.app.admin.controller.AdminReportListController;
@@ -66,6 +68,13 @@ public class AdminFrontController extends HttpServlet {
 	    	result = new AdminMenteeBoardController().execute(request,response);
 	    	System.out.println("멘티 게시판 화면 출력 완료");
 	    	break;
+	    	
+	    case "menteeBoardDetail.admin":
+	    case "/mentorBoardDetail.admin":
+	    	System.out.println("멘티 게시판 상세 화면 출력 준비");
+	    	result = new AdminMenteeBoardDetailController().execute(request,response);
+	    	break;
+	    	
 	         
 	    case "mentorBoardList.admin":
 	    case "/mentorBoardList.admin":

@@ -101,12 +101,19 @@
 		]]>
 	</select>
 	
-	<!-- 멘티 조회수 증가 -->
-	<update id="menteeUpdateReadCount" parameterType="int">
-		UPDATE UB_MENTOR_BOARD
-		SET BOARD_CLICK = BOARD_CLICK + 1
-		WHERE Mentorboard_number = #{boardNumber}
-	</update>
+	<!-- 멘티 상세 조회 -->
+	<select id="menteeSelectOne" resultType="AdMenteeBoardDTO">
+		SELECT UMB.menteeboard_number, UMB.BOARD_TITLE , UMB.BOARD_CONTENT , UMB.BOARD_CONTENT , UMB.BOARD_CLICK , UMB.board_date, UF.FILE_NAME, 
+		CASE
+			WHEN umb.admin_number IS NOT NULL THEN ua.admin_Nickname
+			WHEN umb.MEMBER_number IS NOT NULL THEN um.MEMBER_nickname
+		END AS "write_nickname"
+		FROM  UB_MENTEE_BOARD UMB
+		LEFT JOIN UB_MEMBER UM  ON UMB.member_number = UM.member_number
+		LEFT JOIN UB_ADMIN UA ON UMB.admin_number = UA.admin_number
+		LEFT JOIN UB_FILE UF ON UMB.FILE_NUMBER = UF.FILE_NUMBER
+		WHERE UMB.MENTEEBOARD_NUMBER = ${boardNumber};
+	</select>
 	
 	
 	<!-- 멘토 게시판 -->
@@ -154,11 +161,6 @@
 		]]>
 	</select>
 	
-	<!-- 멘토 조회수 증가 -->
-	<update id="mentorUpdateReadCount" parameterType="int">
-		UPDATE UB_MENTEE_BOARD
-		SET BOARD_CLICK = BOARD_CLICK + 1
-		WHERE Menteeboard_number = #{boardNumber}
-	</update>
+
 	
 </mapper>

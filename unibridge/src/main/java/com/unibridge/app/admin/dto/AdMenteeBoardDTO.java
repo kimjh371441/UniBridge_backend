@@ -1,6 +1,6 @@
 package com.unibridge.app.admin.dto;
 
-public class AdMentoBoardDTO {
+public class AdMenteeBoardDTO {
 
 //	CREATE TABLE UB_MENTOR_BOARD (
 //		    mentorboard_number  NUMBER NOT NULL,
@@ -24,10 +24,7 @@ public class AdMentoBoardDTO {
 	private int boardClick;
 	private String boardDate;
 	private int fileNumber;
-	private int memberNumber;
-	private String memberNickname;
-	private int adminNumber;
-	private String adminNickname;
+	private String writeNickname;
 	
 	
 	public String getBoardTitle() {
@@ -57,17 +54,9 @@ public class AdMentoBoardDTO {
 	public String getBoardDate() {
 		return boardDate;
 	}
-	public int getMemberNumber() {
-		return memberNumber;
-	}
-	public String getMemberNickname() {
-		return memberNickname;
-	}
-	public int getAdminNumber() {
-		return adminNumber;
-	}
+
 	public String getAdminNickname() {
-		return adminNickname;
+		return writeNickname;
 	}
 	
 	

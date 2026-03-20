@@ -50,7 +50,7 @@
       document.body.appendChild(s);
     });
 </script>
-  <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/boardData.js"></script>
+  <%-- <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/boardData.js"></script> --%>
   <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/menteeBoard/boardDetail.js"></script>
 </body>
 </html>
