@@ -64,7 +64,7 @@ public class AdminMenteeBoardDetailController implements Execute {
 		boardDTO.setFileName(file);
 		
 		//로그인 한 사용자 번호 가져오기
-		Integer loginMemberNumber = (Integer) request.getSession().getAttribute("memberNumber");
+		Integer loginMemberNumber = (Integer) request.getSession().getAttribute("adminNumber");
 		System.out.println("로그인 한 멤버 번호 : " + loginMemberNumber);
 		
 		//현재 게시글 작성자 번호 가져오기

@@ -52,7 +52,7 @@
     });
 </script>
 	<script>
-		const writeNubmer = ${board.writeNumber};
+		const writeNumber = ${board.writeNumber};
 		const sessionNumber = ${loginMemberNumber};
 	</script>
   <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/menteeBoard/boardDetail.js"></script>

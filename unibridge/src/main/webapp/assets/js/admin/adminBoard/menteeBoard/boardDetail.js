@@ -10,8 +10,12 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ========================
      수정/삭제 버튼 렌더
   ======================== */
+  
+  console.log(writeNumber);
+  console.log(sessionNumber);
+  
   const postActions = document.getElementById("postActions");
-     if (writeNumber === sessionNumber) {
+     if (Number(writeNumber) === Number(sessionNumber)){
       postActions.innerHTML = `
         <button class="btn btn-blue" id="btnEdit">수정</button>
         <button class="btn btn-red" id="btnDelete">삭제</button>
