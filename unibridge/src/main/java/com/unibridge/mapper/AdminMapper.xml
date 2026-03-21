@@ -107,12 +107,16 @@
 		CASE
 			WHEN umb.admin_number IS NOT NULL THEN ua.admin_Nickname
 			WHEN umb.MEMBER_number IS NOT NULL THEN um.MEMBER_nickname
-		END AS "write_nickname"
+		END AS "write_nickname",
+		CASE
+			WHEN umb.admin_number IS NOT NULL THEN ua.admin_number
+			WHEN umb.MEMBER_number IS NOT NULL THEN um.MEMBER_number
+		END AS "write_number"
 		FROM  UB_MENTEE_BOARD UMB
 		LEFT JOIN UB_MEMBER UM  ON UMB.member_number = UM.member_number
 		LEFT JOIN UB_ADMIN UA ON UMB.admin_number = UA.admin_number
 		LEFT JOIN UB_FILE UF ON UMB.FILE_NUMBER = UF.FILE_NUMBER
-		WHERE UMB.MENTEEBOARD_NUMBER = ${boardNumber};
+		WHERE UMB.MENTEEBOARD_NUMBER = #{boardNumber}
 	</select>
 	
 	

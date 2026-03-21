@@ -1,5 +1,7 @@
 package com.unibridge.app.admin.dto;
 
+import com.unibridge.app.file.dto.FileDTO;
+
 public class AdMenteeBoardDTO {
 
 //	CREATE TABLE UB_MENTOR_BOARD (
@@ -23,7 +25,8 @@ public class AdMenteeBoardDTO {
 	private String boardContent;
 	private int boardClick;
 	private String boardDate;
-	private int fileNumber;
+	private FileDTO fileName;
+	private int writeNumber;
 	private String writeNickname;
 	
 	
@@ -39,11 +42,11 @@ public class AdMenteeBoardDTO {
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
-	public int getFileNumber() {
-		return fileNumber;
+	public FileDTO getFileName() {
+		return fileName;
 	}
-	public void setFileNumber(int fileNumber) {
-		this.fileNumber = fileNumber;
+	public void setFileName(FileDTO fileName) {
+		this.fileName = fileName;
 	}
 	public int getMentorboardNumber() {
 		return mentorboardNumber;
@@ -55,8 +58,14 @@ public class AdMenteeBoardDTO {
 		return boardDate;
 	}
 
-	public String getAdminNickname() {
+	public String getWriteNickname() {
 		return writeNickname;
+	}
+	public int getWriteNumber() {
+		return writeNumber;
+	}
+	public void setWriteNumber(int writeNumber) {
+		this.writeNumber = writeNumber;
 	}
 	
 	

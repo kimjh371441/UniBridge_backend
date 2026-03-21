@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,22 +18,22 @@
     <!-- 제목 + 메타 -->
     <div class="detail-header">
       <div class="detail-title-row">
-        <span class="detail-title-label">제목</span>
-        <span class="detail-title-text">글제목</span>
+        <span class="detail-title-label">제목)</span>
+        <span class="detail-title-text">${board.boardTitle}</span>
       </div>
       <div class="detail-meta">
-        <span>작성날짜 작성시간</span>
-        <span>조회수 0</span>
+        <span>${board.boardDate}</span>
+        <span>조회수 ${board.boardClick}</span>
         <span>댓글 0</span>
       </div>
     </div>
 
     <!-- 본문 -->
-    <div class="detail-content-box">게시글 내용</div>
+    <div class="detail-content-box">${board.boardContent}</div>
 
     <!-- 작성자 + 삭제 -->
     <div class="detail-author-row">
-      <span class="detail-author">작성자 닉네임</span>
+      <span class="detail-author">작성자 : ${board.getWriteNickname()}</span>
       <div id="postActions" style="display:flex; gap:12px;"></div>
     </div>
 
@@ -50,7 +51,10 @@
       document.body.appendChild(s);
     });
 </script>
-  <%-- <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/boardData.js"></script> --%>
+	<script>
+		const writeNubmer = ${board.writeNumber};
+		const sessionNumber = ${loginMemberNumber};
+	</script>
   <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/menteeBoard/boardDetail.js"></script>
 </body>
 </html>

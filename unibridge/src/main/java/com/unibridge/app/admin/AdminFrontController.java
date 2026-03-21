@@ -73,6 +73,7 @@ public class AdminFrontController extends HttpServlet {
 	    case "/mentorBoardDetail.admin":
 	    	System.out.println("멘티 게시판 상세 화면 출력 준비");
 	    	result = new AdminMenteeBoardDetailController().execute(request,response);
+	    	System.out.println("멘티 게시판 상세 화면 출력 완료");
 	    	break;
 	    	
 	         
