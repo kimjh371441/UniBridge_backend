@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멘티 매칭 내역 없음</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentee/myPage/userMatching/nonMatching.css">
 </head>
 <body>
@@ -41,8 +39,5 @@
         </main>
 
     </div>
-
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
 </body>
 </html>

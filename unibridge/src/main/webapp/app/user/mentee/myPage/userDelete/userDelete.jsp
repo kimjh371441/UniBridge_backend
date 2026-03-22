@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멘티 회원탈퇴</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentee/myPage/userDelete/userDelete.css">
     <script>
         // 이 부분이 JS 파일 로드보다 위에 있어야 합니다.
@@ -49,10 +47,10 @@
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>아이디</label>
-                            <input type="text" id="userId" name="userId" class="userInput" placeholder="${loginUser.memberId}" required>
+                            <input type="text" id="userId" name="userId" class="userInput" value="${loginUser.memberId}" required>
                             <div class="spacer"></div>
                         </div>
-                        <div class="errorMsg" id="loginError" style="color: red;">${loginErrorMsg}</div>
+                        	<div class="errorMsg" id="loginError" style="color: red;">${loginErrorMsg}</div> 
                     </div>
                     
                     <div class="inputGroupContainer">
@@ -85,8 +83,5 @@
             </div>
         </main>
     </div>
-
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
 </body>
 </html>

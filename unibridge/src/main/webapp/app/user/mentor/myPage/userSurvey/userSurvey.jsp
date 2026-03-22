@@ -8,8 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멘토 설문조사</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentor/myPage/userSurvey/userSurvey.css">
     <script>
 	    // JS 파일에서 사용할 수 있도록 전역 변수 선언
@@ -37,13 +35,23 @@
                 <img src="${pageContext.request.contextPath}/assets/img/user/userMyPageImg/userManage.jpg" alt="프로필 아이콘">
                 <div class="title">설문조사</div>
             </div>
-         <c:if test="${not empty survey}">
+            <c:if test="${not empty survey}">
             <div class="userTypeBox">
                 <div class="userItem">
                     <label>멘토/멘티</label>
-                    <div class="userValue">멘토</div>
+                    <div class="userValue">
+                    	${survey.surveyType eq 'MENTEE' ? '멘티' : 
+					      survey.surveyType eq 'MENTOR' ? '멘토' : '미정'}
+                    </div>
                 </div>
-                <div class="userItem"></div> 
+                <div class="userItem">
+                	<label>상태</label>
+                    <div class="userValue">
+                    	${survey.surveyApproval eq 'P' ? '검토중' : 
+					      survey.surveyApproval eq 'T' ? '승인됨' : 
+					      survey.surveyApproval eq 'F' ? '거부됨' : '미작성'}
+                    </div>
+                </div> 
                 <div class="userItem">
                     <label>대학</label>
                     <div class="userValue">${survey.gradSchool}</div>
@@ -60,9 +68,9 @@
                     <label>전공</label>
                     <div class="userValue">${survey.subjectNumber}</div>
                 </div>
-            </div> 
-         </c:if>
-            <button id="userWriteBtn">재작성</button>
+            </div>
+            <button id="userWriteBtn" style="display: ${survey.surveyApproval eq 'F' ? 'block' : 'none'};">재작성</button>
+            
             <div id="surveyModal" class="modal">
                 <div class="modalContent">
                     <button class="closeBtn"><img src="${pageContext.request.contextPath}/assets/img/user/userProfile/close.png" alt=""></button>
@@ -73,22 +81,21 @@
                             <div class="inputRow">
                                 <label>멘토/멘티</label>
                                 <div class="radioGroup">
-                                    <label class="radioItem">
-                                        <span>멘토</span> 
-                                        <input type="radio" value="mentor" name="role" class="radioUserType" 
-                                        		${userRole eq 'MENTEE' ? 'disabled' : ''} 
-                								${userRole eq 'MENTOR' ? 'checked' : ''}>
-                                    </label>
-                                    <label class="radioItem">
-                                        <span>멘티</span> 
-                                        <input type="radio" value="mentee" name="role" class="radioUserType"
-                                        		${userRole eq 'MENTOR' ? 'disabled' : ''} 
-                								${userRole eq 'MENTEE' ? 'checked' : ''}>
-                                    </label>
+                                    <label class="radioItem" style="${userRole ne 'MENTOR' ? 'display: none;' : ''}">
+								        <span>멘토</span> 
+								        <input type="radio" value="mentor" name="role" class="radioUserType"
+								               ${userRole eq 'MENTOR' ? 'checked' : ''}>
+								    </label>
+								
+								    <label class="radioItem" style="${userRole ne 'MENTEE' ? 'display: none;' : ''}">
+								        <span>멘티</span> 
+								        <input type="radio" value="mentee" name="role" class="radioUserType"
+								               ${userRole eq 'MENTEE' ? 'checked' : ''}>
+								    </label>
                                 </div>
                             </div>
 
-                            <div id="mentorContent" class="mentorContentList" style="display: block;">
+                            <div id="mentorContent" class="mentorContentList" style="display: none;">
                                 <div class="inputRow">
                                     <label>대학</label>
                                     <input type="text" name="gradSchool" class="modalInput">
@@ -117,7 +124,7 @@
                                 </div>
                             </div>
 
-                            <div id="menteeContent" class="menteeContentList" style="display: none;">
+                            <div id="menteeContent" class="menteeContentList" style="display: block;">
                                 <div class="inputRow">
                                     <label>희망 과목</label>
                                     <select name="subjectNumber" class="modalSelect">
@@ -155,7 +162,7 @@
                                 <div class="fileInputWrapper">
                                     <input type="file" id="surveyFile" name="surveyFile" accept=".pdf, .xlsx, .xls, .doc, .docx, .jpg, .png" onchange="updateFileName()">
                                     <div class="fakeFileInput">
-                                        <label for="surveyFile" id="fileSelector" class="fileSelectBtn">파일 선택</label>
+                                        <label for="surveyFile" id="fileSelector" name="surveyFile" class="fileSelectBtn">파일 선택</label>
                                         <label for="surveyFile" id="fileInfoDisplay" class="fileInfoActive" style="display: none;">
                                             <img src="/frontend/assets/img/user/file-icon.png" alt="파일" class="fileIcon">
                                             <span id="fileNameDisplay" class="fileNameText"></span>
@@ -172,6 +179,7 @@
                     </div>
                 </div>
             </div>
+		</c:if>
         </main>
     </div>
 </body>

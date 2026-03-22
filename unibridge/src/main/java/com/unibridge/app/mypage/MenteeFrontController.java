@@ -51,11 +51,13 @@ public class MenteeFrontController implements Execute {
 	        System.out.println("[Log] 인증 AJAX 액션 실행");
 	        // 기존 MenteeVerifyController의 AJAX 로직만 담당하는 컨트롤러로 연결
 	        outResult = new MenteeVerifyActionController().execute(request, response);
+	        System.out.println("[Log] 인증 AJAX 액션 완료");
 	        break;
 
 	    case "verifySubmit.my": // 3. 최종 비밀번호 및 인증 상태 체크 확인
 	        System.out.println("[Log] 최종 수정 제출 검증 실행");
 	        outResult = new MenteeVerifySubmitController().execute(request, response);
+	        System.out.println("[Log] 최종 수정 제출 검증 완료");
 	        break;
 	        
 		case "updateOk.my": // 회원 정보 수정 페이지

@@ -9,12 +9,12 @@ import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.member.controller.MatchingController;
 import com.unibridge.app.member.controller.MentorDeleteController;
+import com.unibridge.app.member.controller.MentorDeleteOkController;
 import com.unibridge.app.member.controller.MentorMangeController;
 import com.unibridge.app.member.controller.MentorSurveyController;
 import com.unibridge.app.member.controller.MentorUpdateOkController;
 import com.unibridge.app.member.controller.MentorVerifyActionController;
 import com.unibridge.app.member.controller.MentorVerifySubmitController;
-import com.unibridge.app.member.controller.MentorwDeleteOkController;
 import com.unibridge.app.mypage.mentoring.controller.MentoringFrontController;
 
 public class MentorFrontController implements Execute {
@@ -33,9 +33,9 @@ public class MentorFrontController implements Execute {
 
 		switch (target) {
 		case  "myPage.my": // 마이페이지
-			System.out.println("[Log] 결과: MenteeMangeController 실행 시도...");
+			System.out.println("[Log] 결과: MentorMangeController 실행 시도...");
 			outResult = new MentorMangeController().execute(request, response);
-			System.out.println("[Log] 결과: MenteeMangeController 실행 완료!");
+			System.out.println("[Log] 결과: MentorMangeController 실행 완료!");
 			break;
 			
 		case "verify.my": // 1. 인증 페이지로 '단순 이동'
@@ -49,16 +49,18 @@ public class MentorFrontController implements Execute {
 	        System.out.println("[Log] 인증 AJAX 액션 실행");
 	        // 기존 MenteeVerifyController의 AJAX 로직만 담당하는 컨트롤러로 연결
 	        outResult = new MentorVerifyActionController().execute(request, response);
+	        System.out.println("[Log] 인증 AJAX 액션 완료");
 	        break;
 
 	    case "verifySubmit.my": // 3. 최종 비밀번호 및 인증 상태 체크 확인
 	        System.out.println("[Log] 최종 수정 제출 검증 실행");
 	        outResult = new MentorVerifySubmitController().execute(request, response);
+	        System.out.println("[Log] 최종 수정 제출 검증 완료");
 	        break;
 	        
 		case "updateOk.my": // 회원 정보 수정 페이지
             // [추가] 실제 DB 데이터 수정 처리
-            System.out.println("[Log] 결과: MenteeUpdateOkController 실행...");
+            System.out.println("[Log] 결과: MentorUpdateOkController 실행...");
             outResult = new MentorUpdateOkController().execute(request, response);
             System.out.println("[Log] 결과: MenteeUpdateOkController 실행완료!");
             break;
@@ -78,15 +80,15 @@ public class MentorFrontController implements Execute {
 		    break;
 		    
 		case "delete.my": // 회원탈퇴 페이지 이동 및 AJAX 인증 처리 전용
-			System.out.println("[Log] 결과: MenteeDeleteController 실행 시도...");
+			System.out.println("[Log] 결과: MentorDeleteController 실행 시도...");
 			outResult = new MentorDeleteController().execute(request, response);
-			System.out.println("[Log] 결과: MenteeDeleteController 실행 완료!");
+			System.out.println("[Log] 결과: MentorDeleteController 실행 완료!");
 			break;
 			
 		case "deleteOk.my": // 최종 탈퇴 버튼 클릭 시 (비밀번호 & 매칭상태 최종 확인)
-		    System.out.println("[Log] 결과: MenteeDeleteOkController 실행 시도...");
-		    outResult = new MentorwDeleteOkController().execute(request, response);
-		    System.out.println("[Log] 결과: MenteeDeleteOkController 실행 완료!");
+		    System.out.println("[Log] 결과: MentorDeleteOkController 실행 시도...");
+		    outResult = new MentorDeleteOkController().execute(request, response);
+		    System.out.println("[Log] 결과: MentorDeleteOkController 실행 완료!");
 		    break;
 		    
 		case "matching.my": // 매칭정보
@@ -94,6 +96,7 @@ public class MentorFrontController implements Execute {
 			outResult = new MatchingController().execute(request, response);
 			System.out.println("[Log] 결과: MatchingController 실행 완료!");
 			break;
+			
 		case "mentoring.my": //멘토링
 			System.out.println("[Log] 멘토링 진입 -> MentoringFrontController로 위임");
 			outResult = new MentoringFrontController().execute(request, response);

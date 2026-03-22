@@ -36,8 +36,5 @@
         </main>
 
     </div>
-
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
 </body>
 </html>

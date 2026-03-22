@@ -1,5 +1,5 @@
 /**
- * 멘티 설문조사
+ * 미정 설문조사
  */
 const modal = document.getElementById("surveyModal");
 const openBtn = document.getElementById("userWriteBtn");
@@ -27,7 +27,6 @@ function initSurveyForm() {
         }
     }
 }
-
 
 // 페이지 로드 시 및 모달 열 때 초기화 실행
 window.addEventListener('DOMContentLoaded', initSurveyForm);
@@ -91,9 +90,9 @@ submitBtn.onclick = (event) => {
     const finalContextPath = typeof contextPath !== 'undefined' ? contextPath : "";
 
     if (selectedRole === "mentor") {
-        form.action = finalContextPath + "/auth/mentor/survey.my";
+        form.action = finalContextPath + "/auth/undecided/survey.my";
     } else if (selectedRole === "mentee") {
-        form.action = finalContextPath + "/auth/mentee/survey.my";
+        form.action = finalContextPath + "/auth/undecided/survey.my";
     }
 
     console.log("[JS LOG] 전송 경로: " + form.action);
@@ -111,6 +110,6 @@ roleRadios.forEach(radio => {
             menteeContent.style.display = 'block';
         }
     });
-});;/**
+});/**
  * 
  */

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>미정 유저 거부 사유</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/undetermined/myPage/userSurvey/userRefusal.css">
-    <script defer src="${pageContext.request.contextPath}/assets/js/user/undetermined/myPage/userSurvey/userRefusal.js"></script>
+    <script>
+	    // JS 파일에서 사용할 수 있도록 전역 변수 선언
+	    const contextPath = "${pageContext.request.contextPath}";
+	</script>
+    <script defer src="${pageContext.request.contextPath}/assets/js/user/undetermined/myPage/userSurvey/userSurvey.js"></script>
 </head>
 <body>
     
@@ -30,21 +33,26 @@
                 <img src="${pageContext.request.contextPath}/assets/img/user/userMyPageImg/userManage.jpg" alt="프로필 아이콘">
                 <div class="title">설문조사</div>
             </div>
+            <c:if test="${not empty survey}">
             <div class="userTypeBox">
                 <div class="userText">
                     <label>멘토/멘티</label>
-                    <div class="userType">미정</div>
+                    <div class="userType">
+                    	${survey.memberType eq 'MENTEE' ? '멘티' : 
+					      survey.memberType eq 'MENTOR' ? '멘토' : '미정'}
+                    </div>
                 </div>
                 <div class="context"> 
                 <div class="refusalTitle">신청 거부 사유</div>
                     <div class="refusalContext">
                         <div class="refusaltext">
-                            조건 미달
+                            ${survey.surveyRejReason}
                         </div>
                     </div>
                 </div>
             </div>
-            <button id="userWriteBtn">재작성</button>
+            <button id="userWriteBtn" style="display: ${survey.surveyApproval eq 'F' ? 'block' : 'none'};">재작성</button>
+            
             <div id="surveyModal" class="modal"> <div class="modalContent">
                     <button class="closeBtn"><img src="${pageContext.request.contextPath}/assets/img/user/userProfile/close.png" alt=""></button>
                     <div class="surveyTitle">설문 조사</div>
@@ -146,11 +154,10 @@
                     </div>
                 </div>
             </div>
+            </c:if>
         </main>
     </div>
 
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
     <script>const contextPath = "${pageContext.request.contextPath}";</script>
 </body>
 </html>

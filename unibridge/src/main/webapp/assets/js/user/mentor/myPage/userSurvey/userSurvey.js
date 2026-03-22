@@ -1,5 +1,5 @@
 /**
- * 멘티 설문조사
+ * 멘토 설문조사
  */
 const modal = document.getElementById("surveyModal");
 const openBtn = document.getElementById("userWriteBtn");
@@ -27,7 +27,6 @@ function initSurveyForm() {
         }
     }
 }
-
 
 // 페이지 로드 시 및 모달 열 때 초기화 실행
 window.addEventListener('DOMContentLoaded', initSurveyForm);
@@ -111,6 +110,6 @@ roleRadios.forEach(radio => {
             menteeContent.style.display = 'block';
         }
     });
-});;/**
+});/**
  * 
  */

@@ -21,6 +21,8 @@ public class MentorMangeController implements Execute{
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+    	System.out.println("--------------MentorMangeController-------------");
+    	
         String method = request.getMethod().toUpperCase();
 
         switch (method) {
@@ -36,6 +38,9 @@ public class MentorMangeController implements Execute{
     }
 
 	private void doGet(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("멘토 -- 회원 정보 출력");
+		
 		HttpSession session = request.getSession();
 		MemberDTO memberNumber = (MemberDTO) session.getAttribute("loginUser");
 	    System.out.println("MentorMange컨트롤러 : " + memberNumber.getMemberNumber());

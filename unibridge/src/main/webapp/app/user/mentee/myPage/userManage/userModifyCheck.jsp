@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멘티 인증페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentee/myPage/userManage/userModifyCheck.css">
     <script defer src="${pageContext.request.contextPath}/assets/js/user/mentee/myPage/userManage/userModifyCheck.js"></script>
 </head>
@@ -36,32 +34,24 @@
                 <div class="modifyForm">
                     <form action="${pageContext.request.contextPath}/mvc/auth/mentee/verifySubmit.my" method="POST" id="goUserModify">
 
-                        <%-- 현재 비밀번호: spacer로 버튼 자리 확보 → input 너비 통일 --%>
                         <div class="inputGroup">
-                            <label>현재 비밀번호</label>
-                            <div class="inputRow">
-                                <input type="password" name="password" class="userInput" required>
-                                <div class="spacer"></div>
-                            </div>
-                            <c:if test="${not empty pwError}">
-                                <div class="errorText">${pwError}</div>
-                            </c:if>
-                        </div>
+						    <label>현재 비밀번호</label>
+						    <div class="inputRow">
+						        <input type="password" name="password" class="userInput" required>
+						        <div class="spacer"></div>
+						    </div>
+						    <div class="errorText" id="pwErrorMsg">${pwError}</div>
+						</div>
 
-                        <%-- ✅ 전화번호: 입력창 + 버튼 한 줄, 에러는 inputRow 바로 아래 --%>
                         <div class="inputGroup">
-                            <label>전화번호</label>
-                            <div class="inputRow">
-                                <input type="tel" name="phoneNumber" class="userInput" id="phoneNum"
-                                       placeholder="휴대폰 번호 (숫자만 입력)" required>
-                                <button type="button" class="duplication" id="sendSmsBtn">인증번호전송</button>
-                            </div>
-                            <c:if test="${not empty authError}">
-                                <div class="errorText">${authError}</div>
-                            </c:if>
-                        </div>
+						    <label>전화번호</label>
+						    <div class="inputRow">
+						        <input type="tel" name="phoneNumber" class="userInput" id="phoneNum" placeholder="숫자만 입력" required>
+						        <button type="button" class="duplication" id="sendSmsBtn">인증번호전송</button>
+						    </div>
+						    <div class="errorText" id="authErrorMsg">${authError}</div>
+						</div>
 
-                        <%-- 인증번호: 입력창 + 버튼 한 줄, 에러는 inputRow 바로 아래 --%>
                         <div class="inputGroup">
                             <label>인증번호</label>
                             <div class="inputRow">
@@ -79,8 +69,5 @@
         </main>
 
     </div>
-
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
 </body>
 </html>

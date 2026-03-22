@@ -7,9 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>멘티 수정페이지</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentee/myPage/userManage/userModify.css">
+    <script>
+	    window.contextPath = "${pageContext.request.contextPath}";
+	    // 서버에서 전달받은 업데이트 상태를 전역 변수로 저장
+	    window.SERVER_UPDATE_STATUS = "${updateStatus}";
+	</script>
     <script defer src="${pageContext.request.contextPath}/assets/js/user/mentee/myPage/userManage/userModify.js"></script>
 </head>
 <body>
@@ -53,28 +56,30 @@
                         <div class="spacer"></div>
                     </div>
 
-                    <form action="${pageContext.request.contextPath}/mvc/auth/mentee/updateOk.my" method="post">
+                    <form action="${pageContext.request.contextPath}/mvc/auth/mentee/updateOk.my" method="post" id="nickForm">
 					    <input type="hidden" name="updateType" value="nickname">
 					    <div class="inputGroup">
 					        <label>닉네임</label>
-					        <input type="text" class="userInput" name="memberNickname" value="${member.MEMBER_NICKNAME}">
-					        <button type="button" class="duplication" id="nickCheckBtn">중복확인</button>
+					        <input type="text" class="userInput" name="memberNickname" id="memberNickname" value="${member.MEMBER_NICKNAME}">
+					        <button type="button" class="duplication" id="nickCheckBtn" onclick="checkNick()">중복확인</button>
 					        <button type="submit" class="change">변경</button> 
-					        <div class="errorMsg">${nickError}</div> </div>
+					        <div class="errorMsg" id="nickErrorMsg"></div> 
+					    </div>
 					</form>
-
-                    <form action="${pageContext.request.contextPath}/mvc/auth/mentee/updateOk.my" method="post">
+					
+					<form action="${pageContext.request.contextPath}/mvc/auth/mentee/updateOk.my" method="post" id="pwForm">
 					    <input type="hidden" name="updateType" value="password">
 					    <div class="inputGroup">
 					        <label>변경할 비밀번호</label>
-					        <input type="password" class="userInput" name="newPw">
+					        <input type="password" class="userInput" name="newPw" id="newPw">
 					        <div class="errorMsg"></div>
 					    </div>
 					    <div class="inputGroup">
 					        <label>비밀번호 확인</label>
-					        <input type="password" class="userInput" name="newPwConfirm">
+					        <input type="password" class="userInput" name="newPwConfirm" id="newPwConfirm">
+					        <button type="button" class="duplication" onclick="checkPwMatch()">확인</button>
 					        <button type="submit" class="change">변경</button>
-					        <div class="errorMsg">${pwError}</div>
+					        <div class="errorMsg" id="pwErrorMsg"></div>
 					    </div>
 					</form>
 
@@ -85,6 +90,7 @@
 					        <label>전화번호</label>
 					        <input type="text" class="userInput" name="memberPhone" id="memberPhone" value="${member.MEMBER_PHONE}">
 					        <button type="button" class="authBtn" onclick="sendSms()">인증번호전송</button>
+					        <div class="spacer"></div>
 					        <div class="errorMsg" id="phoneSendError" style="color: red;">${phoneError}</div>
 					    </div>
 					

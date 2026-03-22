@@ -9,7 +9,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>멘티 매칭 정보</title>
 	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/mentor/myPage/userMatching/userMatching.css">
 	<script defer src="${pageContext.request.contextPath}/assets/js/user/mentee/myPage/userMatching/userMatching.js"></script>
 </head>
@@ -63,7 +62,7 @@
 							</div>
 							<div class="userText">
 	                            <label>학습보고서</label>
-	                            <form method="post" action="${pageContext.request.contextPath}/mvc/auth/report.rep">
+	                            <form method="get" action="${pageContext.request.contextPath}/mvc/auth/report.rep">
 		                            <button class="mentoringCheck" id="reportBtn">학습보고서 확인</button>
 	                            </form>
                         	</div>

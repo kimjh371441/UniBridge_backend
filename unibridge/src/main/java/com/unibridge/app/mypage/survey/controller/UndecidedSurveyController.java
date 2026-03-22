@@ -7,18 +7,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.member.dto.MemberDTO;
-import com.unibridge.app.mypage.surveyMentee.controller.SurveyMenteeController;
+import com.unibridge.app.mypage.survey.dao.SurveyDAO;
+import com.unibridge.app.mypage.surveyMentee.controller.UndecidedSurveyMentee;
 import com.unibridge.app.mypage.surveyMentee.dao.SurveyMenteeDAO;
 import com.unibridge.app.mypage.surveyMentee.dto.SurveyMenteeDTO;
+import com.unibridge.app.mypage.surveyMentor.controller.UndecidedSurveyMentor;
+import com.unibridge.app.mypage.surveyMentor.dao.SurveyMentorDAO;
+import com.unibridge.app.mypage.surveyMentor.dto.SurveyMentorDTO;
 
 public class UndecidedSurveyController implements Execute {
-	
-	private Result outResult = new Result();
-	
-	@Override
+    
+    private Result outResult = new Result();
+    
+    @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -36,64 +42,88 @@ public class UndecidedSurveyController implements Execute {
         return outResult;
     }
 
-	private void doGet(HttpServletRequest request, HttpServletResponse response) {
-		
-		// 세션에서 로그인 정보 가져오기
-		HttpSession session = request.getSession(false);
-		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+    private void doGet(HttpServletRequest request, HttpServletResponse response) {
+        // 1. 세션에서 로그인 정보 가져오기 및 로그인 체크
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("loginUser") == null) {
+            outResult.setPath(request.getContextPath() + "/mvc/auth/index.main");
+            outResult.setRedirect(true);
+            return;
+        }
+        
+        MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+        int memberNumber = loginUser.getMemberNumber();
 
-		if (loginUser != null) {
-		    int memberNumber = loginUser.getMemberNumber();
-		    System.out.println("조회할 회원 번호: " + memberNumber);
+        // 2. 설문 작성 여부 확인 
+        SurveyDAO surveyDao = new SurveyDAO();
+        int surveyCount = surveyDao.checkSurveyExists(memberNumber); // 기존에 만드신 메서드 활용
 
-		    // DAO 생성 및 데이터 조회
-		    SurveyMenteeDAO dao = new SurveyMenteeDAO();
-		    // surveyMapper.xml의 selectMenteeSurvey 실행
-		    SurveyMenteeDTO survey = dao.selectMenteeSurvey(memberNumber);
-		    
-		    // 사용자 유형 정보를 request에 추가 (예: "mentee" 또는 "mentor")
-	        // DTO의 필드명이 다를 경우 해당 getter로 수정하세요.
-	        request.setAttribute("userRole", loginUser.getMemberType());
-		    System.out.println("회원의 타입 : "+ loginUser.getMemberType());
-		    
-		    // 콘솔 출력용 코드
-		    System.out.println("------------------------------------------");
-		    if (survey != null) {
-		        System.out.println("[조회 결과] 설문 데이터가 존재합니다.");
-		        System.out.println(survey.toString()); // 전체 데이터 출력
-		        System.out.println("학교명: " + survey.getMenteeSchool()); // 개별 필드 출력
-		    } else {
-		        System.out.println("[조회 결과] 해당 회원(" + memberNumber + ")의 설문 데이터가 없습니다.");
-		    }
-		    System.out.println("------------------------------------------");
+        if (surveyCount == 0) {
+            System.out.println("[이동] 설문 기록 없음 (Count: 0) -> 최초 설문 페이지");
+            outResult.setPath("/app/user/undetermined/myPage/userSurvey/firstUserSurvey.jsp");
+            outResult.setRedirect(false);
+            return;
+        }
 
-		    // 조회된 결과가 있다면 request에 저장
-		    if (survey != null) {
-		        // JSP의 <c:if test="${not empty survey}">에서 사용할 이름 "survey"와 일치해야 함
-		        request.setAttribute("survey", survey);
-		        System.out.println("설문 데이터 조회 성공: " + survey.getMenteeSchool());
-		    } else {
-		        System.out.println("해당 회원의 설문 데이터가 존재하지 않습니다.");
-		    }
-		}
+        // 2. 작성한 적이 있다면 DAO를 통해 유형(MENTEE/MENTOR) 가져오기
+//        SurveyDAO surveyDao = new SurveyDAO();
+        String surveyType = surveyDao.getSurveyType(memberNumber);
+        System.out.println("[DEBUG] 조회된 설문 유형: " + surveyType);
 
-		// 결과 화면(JSP)으로 포워딩
-        outResult.setPath("/app/user/undetermined/myPage/userSurvey/userSurvey.jsp");
+        if ("MENTEE".equals(surveyType)) {
+            // 멘티 상세 데이터 조회 후 이동
+            SurveyMenteeDAO menteeDao = new SurveyMenteeDAO();
+            SurveyMenteeDTO menteeSurvey = menteeDao.selectMenteeSurvey(memberNumber);
+            request.setAttribute("survey", menteeSurvey);
+            
+            if ("F".equals(menteeSurvey.getSurveyApproval()) && menteeSurvey.getSurveyRejReason() != null) {
+                outResult.setPath("/app/user/undetermined/myPage/userSurvey/userRefusal.jsp");
+            } else {
+                outResult.setPath("/app/user/undetermined/myPage/userSurvey/menteeUserSurvey.jsp");
+            }
+
+        } else if ("MENTOR".equals(surveyType)) {
+            // 멘토 상세 데이터 조회 후 이동
+            SurveyMentorDAO mentorDao = new SurveyMentorDAO();
+            SurveyMentorDTO mentorSurvey = mentorDao.selectMentorSurvey(memberNumber);
+            request.setAttribute("survey", mentorSurvey);
+
+            if ("F".equals(mentorSurvey.getSurveyApproval()) && mentorSurvey.getSurveyRejReason() != null) {
+                outResult.setPath("/app/user/undetermined/myPage/userSurvey/userRefusal.jsp");
+            } else {
+                outResult.setPath("/app/user/undetermined/myPage/userSurvey/mentorUserSurvey.jsp");
+            }
+        }
+
         outResult.setRedirect(false);
-	   
-	}
+    }
 
-	private void doPost(HttpServletRequest request, HttpServletResponse response) {
-	    System.out.println("[MenteeSurveyController] POST - 진입");
-	    
-	    // multipart 데이터이므로 여기서 getParameter는 무조건 null입니다.
-	    // 따라서 바로 전용 컨트롤러를 실행하여 그 안에서 처리하도록 합니다.
-	    try {
-	        // 현재 페이지의 유저 타입에 따라 기본적으로 멘티 컨트롤러를 실행하거나
-	        // 로직을 단순화하여 멘티 컨트롤러 내에서 분기 처리를 하도록 유도합니다.
-	        outResult = new SurveyMenteeController().execute(request, response);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}
+    private void doPost(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("[UndecidedSurveyController] POST - 진입");
+        
+        try {
+            // 1. MultipartRequest를 생성해야 내부 파라미터(role 등)를 읽을 수 있습니다.
+            String UPLOAD_PATH = request.getServletContext().getRealPath("/") + "upload/";
+            
+            
+            MultipartRequest multi = new MultipartRequest(
+                request, UPLOAD_PATH, 100*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+            );
+
+            // 2. 이제 getParameter가 작동합니다.
+            String role = multi.getParameter("role"); 
+            System.out.println("[DEBUG] 사용자가 선택한 역할: " + role);
+
+            // 3. 분기 처리
+            if ("mentor".equals(role)) {
+                this.outResult = new UndecidedSurveyMentor(multi).execute(request, response);
+            } else {
+                this.outResult = new UndecidedSurveyMentee(multi).execute(request, response);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

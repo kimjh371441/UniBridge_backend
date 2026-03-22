@@ -12,15 +12,18 @@ package com.unibridge.app.mypage.survey.dto;
 public class SurveyDTO {
 	
 	private int surveyNumber;
-	private String surveyType;
-	private String surveyApproval;
-	private String surveyRejReason;
-	private String surveyAppDate;
-	private int adminNumber;
-	//Integer NULL 입력가능;
-	private Integer fileNumber;
-	private int memberNumber;
-	
+    private String surveyType;
+    private String surveyApproval;
+    private String surveyRejReason;
+    private String surveyAppDate;
+    private int adminNumber;
+    private Integer fileNumber; // Null 허용을 위해 Integer 유지
+    private int memberNumber;
+
+    // Mapper에서 Join으로 가져오는 추가 정보
+    private String memberType;
+    private String memberName;
+    
 	public int getSurveyNumber() {
 		return surveyNumber;
 	}
@@ -58,10 +61,10 @@ public class SurveyDTO {
 		this.adminNumber = adminNumber;
 	}
 	public Integer getFileNumber() {
-	    return fileNumber;
+		return fileNumber;
 	}
 	public void setFileNumber(Integer fileNumber) {
-	    this.fileNumber = fileNumber;
+		this.fileNumber = fileNumber;
 	}
 	public int getMemberNumber() {
 		return memberNumber;
@@ -69,13 +72,25 @@ public class SurveyDTO {
 	public void setMemberNumber(int memberNumber) {
 		this.memberNumber = memberNumber;
 	}
-
+	public String getMemberType() {
+		return memberType;
+	}
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	
 	@Override
 	public String toString() {
 		return "SurveyDTO [surveyNumber=" + surveyNumber + ", surveyType=" + surveyType + ", surveyApproval="
 				+ surveyApproval + ", surveyRejReason=" + surveyRejReason + ", surveyAppDate=" + surveyAppDate
 				+ ", adminNumber=" + adminNumber + ", fileNumber=" + fileNumber + ", memberNumber=" + memberNumber
-				+ "]";
+				+ ", memberType=" + memberType + ", memberName=" + memberName + "]";
 	}
-
+	
 }
