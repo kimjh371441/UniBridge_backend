@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
-import com.unibridge.app.member.controller.MenteeDeleteOkController;
 import com.unibridge.app.member.controller.UndecidedDeleteController;
 import com.unibridge.app.member.controller.UndecidedMangeController;
 import com.unibridge.app.member.controller.UndecidedUndecidedDeleteOkController;

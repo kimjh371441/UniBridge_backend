@@ -64,7 +64,7 @@ public class MenteeMangeController implements Execute {
 	private void doPost(HttpServletRequest request, HttpServletResponse response) {
 		
 		// 수정 페이지로 이동
-		outResult.setPath(request.getContextPath()+"/auth/mentee/verify.my"); // 컨텍스트 패스 없이 시도 (FrontController가 처리하도록)
+		outResult.setPath(request.getContextPath()+"/mvc/auth/mentee/verify.my"); // 컨텍스트 패스 없이 시도 (FrontController가 처리하도록)
 	    outResult.setRedirect(true);
 		System.out.println("인증 페이지 이동");
 		

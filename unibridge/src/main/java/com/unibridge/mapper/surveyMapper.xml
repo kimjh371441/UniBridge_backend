@@ -91,7 +91,7 @@
 	</select>
 	
 	<select id="checkSurveyExists" parameterType="int" resultType="int">
-	    SELECT COUNT(*) FROM UB_SURVEY WHERE member_number = #{value}
+	    SELECT COUNT(*) FROM UB_SURVEY WHERE member_number = #{memberNumber}
 	</select>
     
     <select id="selectMentorSurvey" parameterType="int" resultMap="mentorSurveyMap">
@@ -119,6 +119,15 @@
 	        JOIN UB_SURVEY_MENTEE se ON s.survey_number = se.survey_number
 	        WHERE s.member_number = #{memberNumber}
 	        ORDER BY s.survey_number DESC
+	    ) WHERE ROWNUM = 1
+	</select>
+	
+	<select id="getSurveyType" parameterType="int" resultType="string">
+	    SELECT * FROM (
+	        SELECT survey_type
+	        FROM UB_SURVEY
+	        WHERE member_number = #{memberNumber}
+	        ORDER BY survey_number DESC
 	    ) WHERE ROWNUM = 1
 	</select>
     

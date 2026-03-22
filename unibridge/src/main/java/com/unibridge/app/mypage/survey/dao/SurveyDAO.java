@@ -77,4 +77,16 @@ public class SurveyDAO {
             }
         }
     }
+    
+    public String getSurveyType(int memberNumber) {
+        try (SqlSession session = factory.openSession(true)) {
+            return session.selectOne("survey.getSurveyType", memberNumber);
+        }
+    }
+    
+    public int checkSurveyExists(int memberNumber) {
+        try (SqlSession session = factory.openSession(true)) {
+            return session.selectOne("survey.checkSurveyExists", memberNumber);
+        }
+    }
 }

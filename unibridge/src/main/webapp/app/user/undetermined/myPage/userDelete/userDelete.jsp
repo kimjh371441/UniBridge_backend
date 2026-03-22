@@ -7,9 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>미정 회원탈퇴</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/header.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/user/undetermined/myPage/userDelete/userDelete.css">
+    <script>
+        // 이 부분이 JS 파일 로드보다 위에 있어야 합니다.
+        const contextPath = "${pageContext.request.contextPath}";
+    </script>
     <script defer src="${pageContext.request.contextPath}/assets/js/user/undetermined/myPage/userDelete/userDelete.js"></script>
 </head>
 <body>
@@ -38,41 +40,40 @@
                 </ul>
             </div>
             <div class="userInputBox">
-                <form id="deleteForm" action="${pageContext.request.contextPath}/auth/undecided/delete.my" method="post">
+                <form id="deleteForm" action="${pageContext.request.contextPath}/mvc/auth/undecided/deleteOk.my" method="POST">
+                    
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>아이디</label>
-                            <input type="text" id="userId" name="memberId" class="userInput">
+                            <input type="text" id="userId" name="userId" class="userInput" value="${loginUser.memberId}" required>
                             <div class="spacer"></div>
                         </div>
-                        <div class="errorMsg" id="loginError"></div>
+                        	<div class="errorMsg" id="loginError" style="color: red;">${loginErrorMsg}</div> 
                     </div>
                     
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>비밀번호</label>
-                            <input type="password" id="userPw" name="memberPw" class="userInput">
+                            <input type="password" id="userPw" name="userPw" class="userInput" placeholder="비밀번호를 입력하세요" required>
                             <div class="spacer"></div>
                         </div>
-                        <div class="spacer" id="space"></div>
                     </div>
 
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>전화번호</label>
-                            <input type="text" id="userPhone" class="userInput">
+                            <input type="text" id="userPhone" name="userPhone" class="userInput" placeholder="- 없이 숫자만 입력" required>
                             <button type="button" class="duplication" id="sendSms">인증 번호 전송</button>
                         </div>
-                        <div class="spacer" id="space"></div>
                     </div>
 
                     <div class="inputGroupContainer">
                         <div class="inputGroup">
                             <label>인증번호</label>
-                            <input type="text" id="authCode" name="authNumber" class="userInput">
+                            <input type="text" id="authCode" name="authCode" class="userInput" placeholder="6자리 숫자 입력">
                             <button type="button" class="duplication" id="verifySms">인증 확인</button>
                         </div>
-                        <div class="errorMsg" id="authError"></div>
+                        <div class="errorMsg" id="authError" style="color: red;">${authErrorMsg}</div>
                     </div>
 
                     <button type="submit" class="userDeleteBtn" id="submitBtn" disabled>탈퇴 신청</button>
@@ -80,8 +81,5 @@
             </div>
         </main>
     </div>
-
-    <script src="${pageContext.request.contextPath}/assets/js/header.js"></script>
-    <script src="${pageContext.request.contextPath}/assets/js/footer.js"></script>
 </body>
 </html>

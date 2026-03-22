@@ -17,8 +17,9 @@ import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.survey.dao.SurveyDAO;
 import com.unibridge.app.mypage.surveyMentee.dto.SurveyMenteeDTO;
 
-public class SurveyMenteeController implements Execute {
-    private Result outResult = new Result();
+public class UndecidedSurveyMentee implements Execute{
+
+	private Result outResult = new Result();
 
     @Override
     public Result execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,7 +86,7 @@ public class SurveyMenteeController implements Execute {
         }
 
         outResult.setRedirect(true);
-        outResult.setPath(request.getContextPath() + "/mvc/auth/mentee/survey.my");
+        outResult.setPath(request.getContextPath() + "/mvc/auth/undecided/survey.my");
         return outResult;
     }
 }
