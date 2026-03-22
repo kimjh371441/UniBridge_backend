@@ -13,7 +13,7 @@
       <a href="${pageContext.request.contextPath}/app/admin/adminReport/report.admin" class="admin-header__menu" data-link="report">학습보고서</a>
       <a href="${pageContext.request.contextPath}/app/admin/adminUserManagement/userMM.admin" class="admin-header__menu" data-link="user">유저관리</a>
       <a href="${pageContext.request.contextPath}/app/admin/adminMatching/matching.admin" class="admin-header__menu" data-link="matching">매칭</a>
-      <a href="${pageContext.request.contextPath}/app/admin/adminLogin/login.admin" class="admin-header__menu admin-header__menu--logout" data-link="logout">로그아웃</a>
+      <a href="${pageContext.request.contextPath}/logoutOk.admin" class="admin-header__menu admin-header__menu--logout" data-link="logout">로그아웃</a>
     </nav>
   </header>
 

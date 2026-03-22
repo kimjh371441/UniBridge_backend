@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.unibridge.app.Result;
 import com.unibridge.app.admin.controller.AdminLoginController;
 import com.unibridge.app.admin.controller.AdminLoginOkController;
+import com.unibridge.app.admin.controller.AdminLogoutOkController;
 import com.unibridge.app.admin.controller.AdminMainController;
 import com.unibridge.app.admin.controller.AdminMenteeBoardController;
 import com.unibridge.app.admin.controller.AdminMenteeBoardDeleteOkController;
@@ -66,6 +67,13 @@ public class AdminFrontController extends HttpServlet {
 			System.out.println("로그인 확인 준비");
 			result = new AdminLoginOkController().execute(request,response);
 			System.out.println("로그인 확인 완료");
+			break;
+			
+		case "logoutOk.admin":
+		case "/logoutOk.admin":
+			System.out.println("로그아웃 준비");
+			result = new AdminLogoutOkController().execute(request, response);
+			System.out.println("로그아웃 완료");
 			break;
 			
 	    case "main.admin":
