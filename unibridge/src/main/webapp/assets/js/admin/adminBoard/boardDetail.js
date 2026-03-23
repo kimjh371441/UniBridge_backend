@@ -8,57 +8,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const post = postId ? BoardStore.getById(boardType, postId) : null;
 
   /* ========================
-     게시글 데이터 렌더
-  ======================== */
-  if (post) {
-    // 조회수 증가
-    BoardStore.incrementViews(boardType, postId);
-
-    const titleText = document.querySelector(".detail-title-text");
-    if (titleText) titleText.textContent = post.title;
-
-    const metaSpans = document.querySelectorAll(".detail-meta span");
-    if (metaSpans[0]) metaSpans[0].textContent = `${post.date} ${post.time}`;
-    if (metaSpans[1]) metaSpans[1].textContent = `조회수 ${post.views + 1}`;
-    if (metaSpans[2]) metaSpans[2].textContent = `댓글 ${post.comments.length}`;
-
-    const contentBox = document.querySelector(".detail-content-box");
-    if (contentBox) {
-      contentBox.style.color = "#111";
-      contentBox.style.whiteSpace = "pre-line";
-      contentBox.textContent = post.content;
-    }
-
-    const authorEl = document.querySelector(".detail-author");
-    if (authorEl) authorEl.textContent = post.author;
-  }
-
-  /* ========================
      수정/삭제 버튼 렌더
   ======================== */
+  
+  console.log(writeNumber);
+  console.log(sessionNumber);
+  
   const postActions = document.getElementById("postActions");
-  if (postActions) {
-    const isAdmin = post ? post.isAdmin : false;
-    if (isAdmin) {
+     if (Number(writeNumber) === Number(sessionNumber)){
       postActions.innerHTML = `
         <button class="btn btn-blue" id="btnEdit">수정</button>
         <button class="btn btn-red" id="btnDelete">삭제</button>
       `;
     } else {
-      postActions.innerHTML = `
-        <button class="btn btn-red" id="btnDelete">삭제</button>
-      `;
+      postActions.innerHTML = 
+	  `<button class="btn btn-red" id="btnDelete">삭제</button>`;
     }
-  }
+	
 
-  postActions && postActions.addEventListener("click", e => {
+  postActions.addEventListener("click", e => {
     if (e.target.id === "btnEdit") {
-      location.href = `${boardType}BoardEdit.html`;
+      window.location.href = `${boardType}BoardEdit.admin?boardNumber=${boardNumber}`;
     }
     if (e.target.id === "btnDelete") {
       if (confirm("게시글을 삭제하시겠습니까?")) {
-        BoardStore.remove(boardType, postId);
-        location.href = `${boardType}BoardList.html`;
+        window.location.href = `${boardType}BoardDeleteOk.admin?boardNumber=${boardNumber}`;
       }
     }
   });

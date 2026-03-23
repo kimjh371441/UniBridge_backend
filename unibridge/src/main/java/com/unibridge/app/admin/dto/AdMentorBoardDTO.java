@@ -1,6 +1,8 @@
 package com.unibridge.app.admin.dto;
 
-public class AdMentoBoardDTO {
+import com.unibridge.app.file.dto.FileDTO;
+
+public class AdMentorBoardDTO {
 
 //	CREATE TABLE UB_MENTOR_BOARD (
 //		    mentorboard_number  NUMBER NOT NULL,
@@ -23,15 +25,35 @@ public class AdMentoBoardDTO {
 	private String boardContent;
 	private int boardClick;
 	private String boardDate;
-	private int fileNumber;
-	private int memberNumber;
-	private String memberNickname;
-	private int adminNumber;
-	private String adminNickname;
+	private FileDTO fileName;
+	private int writeNumber;
+	private String writeNickname;
+
 	
+	public void setMentorboardNumber(int mentorboardNumber) {
+		this.mentorboardNumber = mentorboardNumber;
+	}
+	public void setBoardClick(int boardClick) {
+		this.boardClick = boardClick;
+	}
+	public void setBoardDate(String boardDate) {
+		this.boardDate = boardDate;
+	}
+	public void setWriteNumber(int writeNumber) {
+		this.writeNumber = writeNumber;
+	}
+	public void setWriteNickname(String writeNickname) {
+		this.writeNickname = writeNickname;
+	}
 	
 	public String getBoardTitle() {
 		return boardTitle;
+	}
+	public int getWriteNumber() {
+		return writeNumber;
+	}
+	public String getWriteNickname() {
+		return writeNickname;
 	}
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
@@ -41,12 +63,6 @@ public class AdMentoBoardDTO {
 	}
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
-	}
-	public int getFileNumber() {
-		return fileNumber;
-	}
-	public void setFileNumber(int fileNumber) {
-		this.fileNumber = fileNumber;
 	}
 	public int getMentorboardNumber() {
 		return mentorboardNumber;
@@ -58,18 +74,19 @@ public class AdMentoBoardDTO {
 		return boardDate;
 	}
 	public int getMemberNumber() {
-		return memberNumber;
+		return writeNumber;
 	}
 	public String getMemberNickname() {
-		return memberNickname;
+		return writeNickname;
 	}
-	public int getAdminNumber() {
-		return adminNumber;
+	public FileDTO getFileName() {
+		return fileName;
 	}
-	public String getAdminNickname() {
-		return adminNickname;
+	public void setFileName(FileDTO fileName) {
+		this.fileName = fileName;
 	}
-	
+
+
 	
 	
 	

@@ -4,9 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMentor = path.includes("mentorBoard");
   const boardType = isMentor ? "mentor" : "mentee";
 
-  /* ========================
-     탭 링크
-  ======================== */
+
   const tabMentee = document.getElementById("tab-mentee");
   const tabMentor = document.getElementById("tab-mentor");
 

@@ -65,7 +65,6 @@ html, body {
   border-radius: 16px;
   padding: 28px 32px;
   font-size: 17px;
-  color: #aaaaaa;
   margin-bottom: 18px;
   line-height: 1.7;
 }
@@ -119,7 +118,6 @@ html, body {
 
 .comment-content {
   font-size: 16px;
-  color: #aaaaaa;
   margin-bottom: 6px;
 }
 

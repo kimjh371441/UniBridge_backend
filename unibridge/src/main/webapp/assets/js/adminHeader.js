@@ -1,16 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ========================
-     메뉴 경로 매핑
-  ======================== */
+
   const menuMap = {
-    main:     `${toAdmin}/adminMain/main.jsp`,
-    notice:   `${toAdmin}/adminNotice/noticeList.jsp`,
-    board:    `${toAdmin}/adminBoard/menteeBoard/menteeBoardList.jsp`,
-    report:   `${toAdmin}/adminReport/reportList.jsp`,
-    user:     `${toAdmin}/adminUserManagement/userList.jsp`,
-    matching: `${toAdmin}/adminMatching/matchingList.jsp`,
-    logout:   `${toAdmin}/adminLogin/login.jsp`,
+    main:     `${toAdmin}/adminMain/main.admin`,
+    notice:   `${toAdmin}/adminNotice/noticeList.admin`,
+    board:    `${toAdmin}/adminBoard/menteeBoard/menteeBoardList.admin`,
+    report:   `${toAdmin}/adminReport/reportList.admin`,
+    user:     `${toAdmin}/adminUserManagement/userList.admin`,
+    matching: `${toAdmin}/adminMatching/matchingList.admin`,
+    logout:   `${toAdmin}/logoutOk.admin`,
   };
 
   /* ========================
@@ -18,11 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
   ======================== */
 
   const pageKeyMap = {
-    notice:   ["noticeList", "noticeDetail.jsp", "noticeWrite.jsp", "noticeEdit.jsp"],
-    board:    ["mentorBoardList.jsp", "menteeBoardList.jsp", "mentorBoardDetail.jsp", "menteeBoardDetail.jsp", "mentorBoardWrite.jsp", "menteeBoardWrite.jsp", "mentorBoardEdit.jsp", "menteeBoardEdit.jsp"],
-    report:   ["reportList.jsp", "reportDetail.jsp"],
-    user:     ["userList.jsp", "userDetail.jsp", "userDetailWaiting.jsp"],
-    matching: ["matchingList.jsp", "matchingDetail.jsp"],
+    notice:   ["noticeList", "noticeDetail.admin", "noticeWrite.admin", "noticeEdit.admin"],
+    board:    ["mentorBoardList.admin", "menteeBoardList.admin", "mentorBoardDetail.admin", "menteeBoardDetail.admin", "mentorBoardWrite.admin", "menteeBoardWrite.admin", "mentorBoardEdit.admin", "menteeBoardEdit.admin"],
+    report:   ["reportList.admin", "reportDetail.admin"],
+    user:     ["userList.admin", "userDetail.admin", "userDetailWaiting.admin"],
+    matching: ["matchingList.admin", "matchingDetail.admin"],
   };
 
   const currentPath = window.location.pathname;

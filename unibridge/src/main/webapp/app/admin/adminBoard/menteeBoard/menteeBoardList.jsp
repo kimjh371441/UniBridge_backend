@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
   <title>게시판 관리 - 멘티</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/adminBoard/boardList.css" />
+  <script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/boardList.js"></script>
+
 </head>
 <body>
 
@@ -22,11 +24,11 @@
     </div>
 
     <!-- 필터 행 -->
-    <div class="filter-row">
+    <div class="filter-row" >
       <div class="filter-date">
-        <input type="date" class="input-date" id="dateFrom" />
+        <input type="date" class="input-date" id="dateFrom" value = "${session.dateFrom}"/>
         <span class="tilde">~</span>
-        <input type="date" class="input-date" id="dateTo" />
+        <input type="date" class="input-date" id="dateTo" value = "${session.dateTo}"/>
       </div>
       <button class="btn" id="btnSearch">조회</button>
       <button class="btn btn-primary" id="btnWrite">+ 게시글 작성</button>
@@ -45,7 +47,6 @@
       
 		<c:choose>
 			<c:when test="${not empty boardList}">
-			<%-- <c:when test="${not empty dateFrom && not empty dateTo }"> --%>
 		      <c:forEach var="board" items="${boardList}">
 		          <a class="board-table-row" href="${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardDetail.admin?boardNumber=${board.menteeboardNumber}" >
 		             <div class="col col-no">
@@ -82,13 +83,13 @@
     <!-- 페이지네이션 -->
     <div class="pagination" id="pagination">          
       <c:if test="${prev}">
-      	<button onclick= 'location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${startPage - 1}"' class="page-btn page-btn-nav">&lsaquo;</button>
+      	<button onclick= 'location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${startPage - 1}&dateFrom=${dateFrom}&dateTo=${dateTo}"' class="page-btn page-btn-nav">&lsaquo;</button>
       </c:if>
       <c:set var="realStartPage" value="${startPage < 0 ? 0:startPage}" />
       <c:forEach var="i" begin="${realStartPage}" end="${endPage}">
       	<c:choose>
       		<c:when test="${!(i == page)}">
-      			<button class="page-btn" onclick='location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${i}"' >
+      			<button class="page-btn" onclick='location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${i}&dateFrom=${dateFrom}&dateTo=${dateTo}"' >
       				<c:out value="${i}" />
       			</button>
       		</c:when>
@@ -100,7 +101,7 @@
       	</c:choose>
       </c:forEach>
       <c:if test="${next}">
-      	<button onclick='location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${endPage + 1}"' class="page-btn page-btn-nav">&gt;</button>
+      	<button onclick='location.href = "${pageContext.request.contextPath}/app/admin/adminBoard/menteeBoard/menteeBoardList.admin?page=${endPage + 1}&dateFrom=${dateFrom}&dateTo=${dateTo}"' class="page-btn page-btn-nav">&gt;</button>
       </c:if>
 	</div>
   </div>
@@ -117,6 +118,5 @@
 	    });
 	</script>
 	<script> const contextPath = "${pageContext.request.contextPath}"; </script>
-	<script src="${pageContext.request.contextPath}/assets/js/admin/adminBoard/boardList.js"></script>
 </body>
 </html>
