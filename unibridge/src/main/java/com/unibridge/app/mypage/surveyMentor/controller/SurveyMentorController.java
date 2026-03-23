@@ -13,6 +13,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.file.dto.FileDTO;
+import com.unibridge.app.member.dao.MemberDAO;
 import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.survey.dao.SurveyDAO;
 import com.unibridge.app.mypage.surveyMentor.dto.SurveyMentorDTO;
@@ -45,6 +46,7 @@ public class SurveyMentorController implements Execute{
         System.out.println("[LOG] 전달된 role: " + role);
 
         SurveyDAO surveyDAO = new SurveyDAO();
+        MemberDAO memberDAO = new MemberDAO();
         SurveyMentorDTO mentorDTO = new SurveyMentorDTO();
 
         try {
@@ -96,7 +98,12 @@ public class SurveyMentorController implements Execute{
 
             // 6. DB 저장 (SurveyDAO 내부에서 파일 -> 설문마스터 -> 멘토상세 순으로 처리)
             surveyDAO.insertMentorSurvey(mentorDTO, fileDTO);
+            
+            int generatedSurveyNumber = mentorDTO.getSurveyNumber(); 
+            memberDAO.updateMemberSurveyNumber(loginUser.getMemberNumber(), generatedSurveyNumber);
+            
             System.out.println("[LOG] 멘토 설문 등록 성공 (회원번호: " + loginUser.getMemberNumber() + ")");
+            
 
         } catch (NumberFormatException e) {
             System.out.println("[ERROR] 숫자 형식 데이터 변환 중 오류 발생: " + e.getMessage());

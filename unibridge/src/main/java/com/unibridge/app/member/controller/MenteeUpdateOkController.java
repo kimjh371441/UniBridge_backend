@@ -50,7 +50,7 @@ public class MenteeUpdateOkController implements Execute {
 
         if (loginUser != null) {
             // DB에서 최신 정보를 조회하여 request에 담기
-            Map<String, Object> member = dao.selectMember(loginUser.getMemberNumber());
+            Map<String, Object> member = dao.selectMemberDetail(loginUser.getMemberNumber());
             request.setAttribute("member", member);
         }
 

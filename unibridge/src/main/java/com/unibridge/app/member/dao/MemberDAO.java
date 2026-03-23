@@ -170,4 +170,18 @@ public class MemberDAO {
             return sqlSession.selectOne("member.selectMemberDetail", memberNumber);
         }
     }
+    
+    /**
+     * 회원의 설문 번호를 업데이트하고 설문 작성 상태를 'Y'로 변경합니다.
+     * @param memberNumber 회원 번호
+     * @param surveyNumber 새로 생성된 설문 번호
+     */
+    public void updateMemberSurveyNumber(int memberNumber, int surveyNumber) {
+        java.util.Map<String, Object> map = new java.util.HashMap<>();
+        map.put("memberNumber", memberNumber);
+        map.put("surveyNumber", surveyNumber);
+        
+        // memberMapper.xml (또는 해당 namespace)의 updateMemberSurveyNumber 쿼리 호출
+        sqlSession.update("member.updateMemberSurveyNumber", map);
+    }
 }

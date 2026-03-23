@@ -10,6 +10,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.file.dto.FileDTO;
+import com.unibridge.app.member.dao.MemberDAO;
 import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.survey.dao.SurveyDAO;
 import com.unibridge.app.mypage.surveyMentee.dto.SurveyMenteeDTO;
@@ -41,6 +42,7 @@ public class UndecidedSurveyMentee implements Execute {
         menteeDTO.setSubjectNumber(subjectStr != null ? Integer.parseInt(subjectStr) : 0);
 
         // 파일 처리 및 DTO 조립 로직
+        MemberDAO memberDAO = new MemberDAO();
         FileDTO fileDTO = null;
         String originalName = multi.getOriginalFileName("surveyFile");
 
@@ -69,6 +71,11 @@ public class UndecidedSurveyMentee implements Execute {
         }
 
         new SurveyDAO().insertMenteeSurvey(menteeDTO, fileDTO);
+        
+        int generatedSurveyNumber = menteeDTO.getSurveyNumber(); 
+        memberDAO.updateMemberSurveyNumber(loginUser.getMemberNumber(), generatedSurveyNumber);
+        
+        System.out.println("[LOG] 멘토 설문 등록 성공 (회원번호: " + loginUser.getMemberNumber() + ")");
 
         outResult.setRedirect(true);
         outResult.setPath(request.getContextPath() + "/mvc/auth/undecided/survey.my");

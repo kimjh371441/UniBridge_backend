@@ -12,6 +12,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.file.dto.FileDTO;
+import com.unibridge.app.member.dao.MemberDAO;
 import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.survey.dao.SurveyDAO;
 import com.unibridge.app.mypage.surveyMentor.dto.SurveyMentorDTO;
@@ -42,6 +43,7 @@ public class UndecidedSurveyMentor implements Execute {
         mentorDTO.setSubjectNumber((subjectStr != null && !subjectStr.isEmpty()) ? Integer.parseInt(subjectStr) : 0);
 
         // 파일 처리 및 이름 변경 로직
+        MemberDAO memberDAO = new MemberDAO();
         FileDTO fileDTO = null;
         String originalName = multi.getOriginalFileName("surveyFile");
 
@@ -70,6 +72,11 @@ public class UndecidedSurveyMentor implements Execute {
         }
 
         new SurveyDAO().insertMentorSurvey(mentorDTO, fileDTO);
+        
+        int generatedSurveyNumber = mentorDTO.getSurveyNumber(); 
+        memberDAO.updateMemberSurveyNumber(loginUser.getMemberNumber(), generatedSurveyNumber);
+        
+        System.out.println("[LOG] 멘토 설문 등록 성공 (회원번호: " + loginUser.getMemberNumber() + ")");
 
         outResult.setRedirect(true);
         outResult.setPath(request.getContextPath() + "/mvc/auth/undecided/survey.my");

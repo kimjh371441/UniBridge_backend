@@ -45,7 +45,7 @@
 				    <form action="${pageContext.request.contextPath}/mvc/auth/mentee/updateOk.my" method="post" enctype="multipart/form-data" id="imageForm">
 				        <input type="hidden" name="updateType" value="profileImg">
 				        <input type="file" name="profileFile" id="profileFileInput" style="display: none;" accept="image/*">
-				        <button type="button" id="imgBtn" onclick="document.getElementById('profileFileInput').click();">사진 변경</button>
+				        <button type="button" id="imgBtn" class="imgBtn" onclick="document.getElementById('profileFileInput').click();">사진 변경</button>
 				    </form>
 				    <div class="errorMsg" id="imageError"></div>
 				</div>

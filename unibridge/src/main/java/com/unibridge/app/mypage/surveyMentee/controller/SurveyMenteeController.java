@@ -13,6 +13,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
 import com.unibridge.app.file.dto.FileDTO;
+import com.unibridge.app.member.dao.MemberDAO;
 import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.survey.dao.SurveyDAO;
 import com.unibridge.app.mypage.surveyMentee.dto.SurveyMenteeDTO;
@@ -44,6 +45,7 @@ public class SurveyMenteeController implements Execute {
         System.out.println("[LOG] 전달된 role: " + role);
         
         SurveyDAO surveyDAO = new SurveyDAO();
+        MemberDAO memberDAO = new MemberDAO();
         SurveyMenteeDTO menteeDTO = new SurveyMenteeDTO();
 
         
@@ -95,6 +97,11 @@ public class SurveyMenteeController implements Execute {
             
             // 5. DB 저장
             surveyDAO.insertMenteeSurvey(menteeDTO, fileDTO);
+            
+            int generatedSurveyNumber = menteeDTO.getSurveyNumber(); 
+            memberDAO.updateMemberSurveyNumber(loginUser.getMemberNumber(), generatedSurveyNumber);
+            
+            System.out.println("[LOG] 멘토 설문 등록 성공 (회원번호: " + loginUser.getMemberNumber() + ")");
             
         } catch (NumberFormatException e) {
             System.out.println("[Error] 숫자 형식 데이터 오류 발생");
