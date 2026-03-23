@@ -26,6 +26,8 @@ import com.unibridge.app.admin.controller.AdminMentorBoardEditController;
 import com.unibridge.app.admin.controller.AdminMentorBoardEditOkController;
 import com.unibridge.app.admin.controller.AdminMentorBoardWriteController;
 import com.unibridge.app.admin.controller.AdminMentorBoardWriteOkController;
+import com.unibridge.app.admin.controller.AdminNoticeBoardController;
+import com.unibridge.app.admin.controller.AdminNoticeDetailController;
 import com.unibridge.app.admin.controller.AdminReportController;
 import com.unibridge.app.admin.controller.AdminReportDeleteController;
 import com.unibridge.app.admin.controller.AdminReportDetailController;
@@ -136,54 +138,75 @@ public class AdminFrontController extends HttpServlet {
 	    	
 	    case "mentorBoardList.admin":
 	    case "/mentorBoardList.admin":
-	    	System.out.println("멘티 게시판 화면 출력 준비");
+	    	System.out.println("멘토 게시판 화면 출력 준비");
 	    	result = new AdminMentorBoardController().execute(request,response);
-	    	System.out.println("멘티 게시판 화면 출력 완료");
+	    	System.out.println("멘토 게시판 화면 출력 완료");
 	    	break;
 	    	
 	    case "mentorBoardDetail.admin":
 	    case "/mentorBoardDetail.admin":
-	    	System.out.println("멘티 게시판 상세 화면 출력 준비");
+	    	System.out.println("멘토 게시판 상세 화면 출력 준비");
 	    	result = new AdminMentorBoardDetailController().execute(request,response);
-	    	System.out.println("멘티 게시판 상세 화면 출력 완료");
+	    	System.out.println("멘토 게시판 상세 화면 출력 완료");
 	    	break;
 	    	
 	    case "mentorBoardWrite.admin":
 	    case "/mentorBoardWrite.admin":
-	    	System.out.println("멘티 게시판 글 생성 화면 출력 준비");
+	    	System.out.println("멘토 게시판 글 생성 화면 출력 준비");
 	    	result = new AdminMentorBoardWriteController().execute(request, response);
-	        System.out.println("멘티 게시판 글 생성 화면 출력 완료");
+	        System.out.println("멘토 게시판 글 생성 화면 출력 완료");
 	        break;
 	        
 	    case "mentorBoardWriteOk.admin":
 	    case "/mentorBoardWriteOk.admin":
-	    	System.out.println("멘티 게시판 글 생성 준비");
+	    	System.out.println("멘토 게시판 글 생성 준비");
 	    	result = new AdminMentorBoardWriteOkController().execute(request, response);
-	    	System.out.println("멘티 게시판 글 작성 완료");
+	    	System.out.println("멘토 게시판 글 작성 완료");
 	    	break;
 	        
 	    case "mentorBoardEdit.admin":
 	    case "/mentorBoardEdit.admin":
-	    	System.out.println("멘티 게시판 글 수정 화면 출력 준비");
+	    	System.out.println("멘토 게시판 글 수정 화면 출력 준비");
 	    	result = new AdminMentorBoardEditController().execute(request, response);
-	    	System.out.println("멘티 게시판 글 수정 화면 출력 완료");
+	    	System.out.println("멘토 게시판 글 수정 화면 출력 완료");
 	    	break;
 
 	    case "mentorBoardEditOk.admin":
 	    case "/mentorBoardEditOk.admin":
-	    	System.out.println("멘티 게시판 글 수정 준비");
+	    	System.out.println("멘토 게시판 글 수정 준비");
 	    	result = new AdminMentorBoardEditOkController().execute(request, response);
-	    	System.out.println("멘티 게시판 글 수정 완료");
+	    	System.out.println("멘토 게시판 글 수정 완료");
 	    	break;
 	    	
 	    case "mentorBoardDeleteOk.admin":
 	    case "/mentorBoardDeleteOk.admin":
-	    	System.out.println("멘티 게시판 글 삭제 준비");
+	    	System.out.println("멘토 게시판 글 삭제 준비");
 	    	result = new AdminMentorBoardDeleteOkController().execute(request, response);
-	    	System.out.println("멘티 게시판 글 삭제 완료");
+	    	System.out.println("멘토 게시판 글 삭제 완료");
 	    	break;
 	    	
+	    	
+	    	
 	    
+	    case "noticeList.admin":
+	    case "/noticeList.admin":
+	    	System.out.println("공지 목록 화면 출력 준비");
+	    	result = new AdminNoticeBoardController().execute(request, response);
+	    	System.out.println("공지 목록 화면 출력 완료");
+	    	break;
+	    	
+	    case "noticeDetail.admin":
+	    case "/noticeDetail.admin":
+	    	System.out.println("공지 상세보기 화면 출력 준비");
+	    	result = new AdminNoticeDetailController().execute(request, response);
+	    	System.out.println("공지 상세보기 화면 출력 완료");
+	    	break;
+	    	
+	    	
+	    	
+	    	
+	    	
+	    	
 	    case  "report.admin":
 		case "/report.admin":
 			result = new AdminReportController().execute(request, response);

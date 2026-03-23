@@ -68,7 +68,6 @@
 		             </div>
 		          </a>
 		       </c:forEach>
-		   <%-- </c:when> --%>
 		   </c:when>
 		   <c:otherwise>
 		      <div>
