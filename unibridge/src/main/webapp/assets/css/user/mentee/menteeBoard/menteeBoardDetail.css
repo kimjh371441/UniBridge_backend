@@ -242,11 +242,16 @@
 
 .comment-list-wrap { margin-top: 16px; border: 1px solid #dfdfdf; background: #F3F5F7; }
 .comment-item {
+  display: flex; flex-direction: column;
   border: 1px solid #dfdfdf; border-radius: 25px;
   padding: 16px 20px; margin-bottom: 12px; background: #fff;
+  min-height: 72px;
+}
+.comment-item:last-child {
+  margin-bottom: 0;
 }
 .comment-item-top {
-  display: flex; align-items: center; gap: 16px;
+  display: flex; align-items: center; gap: 16px; flex: 1;
 }
 .comment-nickname {
   font-size: 13px; font-weight: 700; color: #2F6FED;
@@ -269,7 +274,7 @@
   margin-bottom: 6px;
 }
 .comment-btn-group {
-  display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px;
+  display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; min-height: 28px;
 }
 .comment-modify-btn {
   font-size: 12px; color: #555;

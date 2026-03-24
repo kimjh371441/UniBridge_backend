@@ -179,7 +179,7 @@
 							<c:set var="imgNum" value="${(status.index % 5) + 1}" />
 								<div class="jobBannerCard" data-job-id="${company.employmentId}"
 									<%-- DB에 URL이 있으면 해당 URL로, 없으면 사람인 기본 페이지로 이동 --%>
-                            onclick="window.open('${not empty company.employmentUrl ? company.employmentUrl : 'https://www.saramin.co.kr/'}', '_blank')"
+                            onclick="window.open('${not empty company.employmentUrl ? 'https://www.saramin.co.kr/' : 'https://www.saramin.co.kr/'}', '_blank')"
 									style="cursor: pointer;">
 
 									<c:choose>
