@@ -67,7 +67,6 @@ public class PaymentOkController implements Execute {
 				Long matchingNumber = (Long) session.getAttribute("matchingNumber");
 				String payAmount = (String) session.getAttribute("payAmount");
 
-				// 안전장치
 				if (memberNumber == null) memberNumber = 1L;
 				if (payAmount == null) payAmount = "10000";
 

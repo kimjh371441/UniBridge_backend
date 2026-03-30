@@ -128,12 +128,24 @@
 							</div>
 
 							<div id="profile">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/assets/img/user/userProfile/userIcon.png"
-									alt="아이콘"> <img id="profileImg"
-									src="${pageContext.request.contextPath}/upload/${not empty mentoring.fileName ? mentoring.fileName : 'default.png'}"
-									onerror="this.src='${pageContext.request.contextPath}/assets/img/user/userProfile/ex1.png'"
-									alt="프로필">
+								<%-- 마이페이지로 이동하는 링크 설정 --%>
+								<a
+									href="${pageContext.request.contextPath}/mvc/auth/mentor/myPage.my">
+									<c:choose>
+										<%-- 1. 프로필 사진이 있는 경우: 사진만 보여주고 아이콘은 생성하지 않음 --%>
+										<c:when test="${not empty mentoring.fileName}">
+											<img id="profileImg"
+												src="${pageContext.request.contextPath}/display.file?fileName=${mentoring.fileName}"
+												alt="프로필 사진">
+										</c:when>
+
+										<%-- 2. 프로필 사진이 없는 경우: 아이콘만 보여주고 프로필 태그는 생성하지 않음 --%>
+										<c:otherwise>
+											<img
+												src="${pageContext.request.contextPath}/assets/img/user/userProfile/userIcon.png"
+												alt="기본 아이콘">
+										</c:otherwise>
+									</c:choose>
 								</a>
 							</div>
 						</div>
@@ -149,13 +161,5 @@
 	</div>
 
 	<jsp:include page="/app/user/footer.jsp" />
-	<script>
-		function deleteMentoring(internalId) {
-			if (confirm("정말로 이 멘토링을 삭제하시겠습니까?")) {
-				location.href = "${pageContext.request.contextPath}/mvc/auth/mentor/mentoringDeleteOk.my?mentoringNumber="
-						+ mentoringNumber;
-			}
-		}
-	</script>
 </body>
 </html>
