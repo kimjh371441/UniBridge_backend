@@ -116,7 +116,7 @@
 					<c:when test="${not empty mentorCardList}">
 						<c:forEach var="mentor" items="${mentorCardList}">
 							<div class="mentoRecommendCard"
-								onclick="location.href='${pageContext.request.contextPath}/mentor/mentorDetailOk.sch?memberNumber=${mentor.mentorNumber}'">
+								onclick="location.href='${pageContext.request.contextPath}/mentor/mentorDetailOk.sch?memberNumber=${mentor.memberNumber}'">
 								<div class="mentoRecommendAvatar">
 									<c:choose>
 										<c:when test="${not empty mentor.fileName}">

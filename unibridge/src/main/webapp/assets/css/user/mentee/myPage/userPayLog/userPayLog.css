@@ -62,11 +62,6 @@ aside ul li a {
     text-align: center;
 }
 
-aside ul li a:hover {
-    background-color: #dde5ff;
-    color: #4f73e3;
-}
-
 aside ul li a.active {
     color: #4f73e3;
     font-weight: 700;
