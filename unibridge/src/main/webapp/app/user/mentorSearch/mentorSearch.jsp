@@ -47,19 +47,19 @@
 				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="전체" id="nowCategory">전체</a></li>
 				<li><a href="javascript:void(0)" class="category-btn"
+					data-name="국어">국어</a></li>
+				<li><a href="javascript:void(0)" class="category-btn"
+					data-name="영어">영어</a></li>
+				<li><a href="javascript:void(0)" class="category-btn"
+					data-name="수학">수학</a></li>
+				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="자바">자바</a></li>
 				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="파이썬">파이썬</a></li>
 				<li><a href="javascript:void(0)" class="category-btn"
-					data-name="국어">국어</a></li>
-				<li><a href="javascript:void(0)" class="category-btn"
-					data-name="수학">수학</a></li>
-				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="C++">C++</a></li>
 				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="C언어">C언어</a></li>
-				<li><a href="javascript:void(0)" class="category-btn"
-					data-name="영어">영어</a></li>
 				<li><a href="javascript:void(0)" class="category-btn"
 					data-name="게임">게임</a></li>
 			</ul>

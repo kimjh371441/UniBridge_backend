@@ -36,6 +36,7 @@ public class MentorDetailOkController implements Execute {
 
 		// 3. 파라미터 받기 및 상세 정보 조회
 		String memberNumberStr = request.getParameter("memberNumber");
+		System.out.println("memberNumberStr : "+memberNumberStr);
 		if (memberNumberStr == null) {
 			result.setPath("/mentor/mentorSearchOk.sch"); // 번호 없으면 목록으로
 			result.setRedirect(true);

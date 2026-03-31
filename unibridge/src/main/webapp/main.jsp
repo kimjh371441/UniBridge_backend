@@ -116,7 +116,7 @@
 					<c:when test="${not empty mentorCardList}">
 						<c:forEach var="mentor" items="${mentorCardList}">
 							<div class="mentoRecommendCard"
-								onclick="location.href='${pageContext.request.contextPath}/mentor/mentorDetailOk.sch?memberNumber=${mentor.mentorNumber}'">
+								onclick="location.href='${pageContext.request.contextPath}/mentor/mentorDetailOk.sch?memberNumber=${mentor.memberNumber}'">
 								<div class="mentoRecommendAvatar">
 									<c:choose>
 										<c:when test="${not empty mentor.fileName}">
@@ -132,7 +132,7 @@
 									</c:choose>
 								</div>
 								<div class="mentoRecommendInfo">
-									<p class="mentoRecommendName">${mentor.memberNickname}멘토</p>
+									<p class="mentoRecommendName">${mentor.memberName}멘토</p>
 									<p class="mentoRecommendSchool">${mentor.gradSchool} ${mentor.gradDepart}</p>
 									<p class="mentoRecommendMentoTitle">${mentor.mentoringTitle}</p>
 									<div class="mentoRecommendTags">

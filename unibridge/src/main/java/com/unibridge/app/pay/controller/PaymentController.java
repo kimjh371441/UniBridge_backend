@@ -15,6 +15,19 @@ public class PaymentController implements Execute {
 		HttpSession session = request.getSession();
 
 		try {
+			
+			if (session.getAttribute("loginUser") == null) {
+				System.out.println(">>> [보안 경고] 비로그인 사용자의 결제 시도 차단");
+				result.setPath(request.getContextPath() + "/signin.mem");
+				result.setRedirect(true);
+				return result;
+			}
+
+			String memberType = (String) session.getAttribute("memberType");
+			if (!"MENTEE".equals(memberType) && !"mentee".equals(memberType)) {
+				System.out.println(">>> [보안 경고] 권한 없는 사용자(" + memberType + ")의 결제 시도 차단"); 
+			}
+			
 			// 파라미터 이름을 확인하세요 (상세페이지에서 memberNumber로 보낸다고 가정)
 			String mentorNumberStr = request.getParameter("memberNumber");
 			System.out.println(">>> [DEBUG] 넘어온 멘토 번호: " + mentorNumberStr);

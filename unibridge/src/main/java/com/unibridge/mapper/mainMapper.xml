@@ -2,41 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="main">
 
-    <resultMap id="ContestResultMap" type="com.unibridge.app.main.dto.MainDTO$ContestDTO">
-        <id     property="contestNumber" column="contest_number" />
-        <result property="title"         column="title"          />
-        <result property="detail"        column="detail"         />
-        <result property="startDate"     column="start_date"     />
-        <result property="endDate"       column="end_date"       />
-        <result property="hostCompany"   column="host_company"   />
-        <result property="techStack"     column="tech_stack"     />
-        <result property="status"        column="status"         />
-    </resultMap>
-
-    <resultMap id="MentorCardResultMap" type="com.unibridge.app.main.dto.MainDTO$MentorCardDTO">
-        <id     property="mentoringNumber" column="mentoring_number" />
-        <result property="mentorNumber"    column="mentor_number"     />
-        <result property="mentoringTitle"  column="mentoring_title"   />
-        <result property="mentoringGoal"   column="mentoring_goal"    />
-        <result property="mentoringDetail" column="mentoring_detail"  />
-        <result property="mentoringFile"   column="mentoring_file"    />
-        <result property="subjectNumber"   column="subject_number"    />
-        <result property="subjectName"     column="subject_name"      />
-        <result property="memberNickname"  column="member_nickname"   />
-        <result property="memberProfile"   column="member_file_number"    />
-    </resultMap>
-
-    <select id="getContestList" resultMap="ContestResultMap">
+    <select id="getContestList" resultType="com.unibridge.app.main.dto.MainDTO$ContestDTO">
         SELECT *
         FROM (
             SELECT
                 c.contest_number,
                 title,
                 detail,
-                start_date,
-                end_date,
-                host_company,
-                tech_stack,
+                start_date AS startDate,
+                end_date AS endDate,
+                host_company AS hostCompany,
+                tech_stack AS techStack,
                 status
             FROM UB_CONTEST c
             join UB_NOTICEBOARD n ON c.contest_number = n.contest_number
@@ -48,32 +24,29 @@
         ]]>
     </select>
 
-    <select id="getMentorCardList" resultMap="MentorCardResultMap">
+<select id="getMentorCardList" resultType="com.unibridge.app.main.dto.MainDTO$MentorCardDTO">
     SELECT *
     FROM (
         SELECT
-            /* 별칭을 DTO의 필드명인 mentoringNumber와 정확히 일치시킵니다 */
-            m.MENTORING_NUMBER      AS mentoringNumber, 
-            m.MENTOR_NUMBER    AS mentorNumber,
+            m.MENTORING_NUMBER AS mentoringNumber, 
+            m.MENTOR_NUMBER    AS memberNumber,   /* 상세페이지가 기대하는 이름으로 별칭 */
             m.MENTORING_TITLE  AS mentoringTitle,
             m.MENTORING_GOAL   AS mentoringGoal,
             s.subject_name     AS subjectName,
-            mb.member_nickname AS memberNickname,
-            mb.member_gender    AS memberGender,
-            f.file_name         AS fileName,
-            sm.grad_school      AS gradSchool,
-            sm.grad_depart      AS gradDepart
-            FROM UB_MENTORING m
-        JOIN UB_MEMBER  mb ON m.MENTOR_NUMBER  = mb.member_number
+            mb.member_name AS memberName,
+            mb.member_gender   AS memberGender,
+            f.file_name        AS fileName,
+            sm.grad_school     AS gradSchool,
+            sm.grad_depart     AS gradDepart
+        FROM UB_MENTORING m
+        JOIN UB_MEMBER mb ON m.MENTOR_NUMBER = mb.member_number
         LEFT JOIN UB_SUBJECT s ON m.SUBJECT_NUMBER = s.subject_number
         LEFT JOIN UB_FILE f ON mb.file_number = f.file_number
         LEFT JOIN UB_SURVEY_MENTOR sm ON mb.survey_number = sm.survey_number
         WHERE mb.member_state = '계정 활성화'
         ORDER BY m.CREATED_AT DESC
     )
-    <![CDATA[
-    WHERE ROWNUM <= 7
-    ]]>
+    <![CDATA[ WHERE ROWNUM <= 7 ]]>
 </select>
 
 <select id="getCompanyList" resultType="com.unibridge.app.main.dto.MainDTO$CompanyDTO">

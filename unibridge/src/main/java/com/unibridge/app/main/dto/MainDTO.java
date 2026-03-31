@@ -113,10 +113,11 @@ public class MainDTO {
 	// 추천 멘토 정보 (수정됨)
 	public static class MentorCardDTO {
 		private String mentoringNumber;
-	    private long mentorNumber;
+		private long memberNumber;
 	    private String mentoringTitle;
+	    private String mentoringGoal;
 	    private String subjectName;
-	    private String memberNickname;
+	    private String memberName;
 	    private String fileName;     // 프로필 이미지 파일명
 	    private String gradSchool;   // 학교 명
 	    private String gradDepart;   // 학과 명
@@ -143,13 +144,14 @@ public class MainDTO {
 			this.mentoringNumber = mentoringNumber;
 		}
 
-		public long getMentorNumber() {
-			return mentorNumber;
+		
+		public long getMemberNumber() {
+			return memberNumber;
 		}
 
 
-		public void setMentorNumber(long mentorNumber) {
-			this.mentorNumber = mentorNumber;
+		public void setMemberNumber(long memberNumber) {
+			this.memberNumber = memberNumber;
 		}
 
 
@@ -160,6 +162,17 @@ public class MainDTO {
 
 		public void setMentoringTitle(String mentoringTitle) {
 			this.mentoringTitle = mentoringTitle;
+		}
+
+		
+
+		public String getMentoringGoal() {
+			return mentoringGoal;
+		}
+
+
+		public void setMentoringGoal(String mentoringGoal) {
+			this.mentoringGoal = mentoringGoal;
 		}
 
 
@@ -173,13 +186,13 @@ public class MainDTO {
 		}
 
 
-		public String getMemberNickname() {
-			return memberNickname;
+		public String getMemberName() {
+			return memberName;
 		}
 
 
-		public void setMemberNickname(String memberNickname) {
-			this.memberNickname = memberNickname;
+		public void setMemberName(String memberName) {
+			this.memberName = memberName;
 		}
 
 
@@ -193,7 +206,7 @@ public class MainDTO {
 		}
 
 
-	public String getGradSchool() {
+		public String getGradSchool() {
 			return gradSchool;
 		}
 
@@ -212,13 +225,16 @@ public class MainDTO {
 			this.gradDepart = gradDepart;
 		}
 
+
 		@Override
 		public String toString() {
-			return "MentorCardDTO [mentoringNumber=" + mentoringNumber + ", mentorNumber=" + mentorNumber
-					+ ", mentoringTitle=" + mentoringTitle + ", subjectName=" + subjectName + ", memberNickname="
-					+ memberNickname + ", fileName=" + fileName + ", gradSchool=" + gradSchool + ", gradDepart="
-					+ gradDepart + "]" + ", memberGender=" + memberGender + "]";
+			return "MentorCardDTO [mentoringNumber=" + mentoringNumber + ", memberNumber=" + memberNumber
+					+ ", mentoringTitle=" + mentoringTitle + ", mentoringGoal=" + mentoringGoal + ", subjectName="
+					+ subjectName + ", memberName=" + memberName + ", fileName=" + fileName + ", gradSchool="
+					+ gradSchool + ", gradDepart=" + gradDepart + ", memberGender=" + memberGender + "]";
 		}
+
+		
 		
 	}
 	

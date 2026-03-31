@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>멘토링 조회 - UniBridge</title>
 
-<%-- CSS 경로들을 절대 경로로 수정하여 서버 환경에서 안전하게 불러옵니다 --%>
+<%-- CSS 경로 --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/fonts.css">
 <link rel="stylesheet"
@@ -45,19 +45,14 @@
 		</aside>
 
 		<main>
-			<div class="userManageTitle">
-				<img
-					src="${pageContext.request.contextPath}/assets/img/user/userMyPageImg/userMentoring.jpg"
-					alt="멘토링 관리 아이콘">
-				<div class="title">멘토링 관리</div>
-			</div>
-
-			<%-- 수정/삭제 처리를 위한 Form --%>
-			<form method="post"
-				action="${pageContext.request.contextPath}/auth/mentor/mentoringUpdate.my">
-				<%-- 수정을 위해 데이터의 고유 ID(PK)를 숨겨서 전달: DTO의 internalId와 매칭 --%>
-				<input type="hidden" name="mentoringId"
-					value="${mentoring.mentoringNumber}">
+			<div class="mentoringContainer">
+				<%-- Modify와 동일한 제목 및 구분선 구조 --%>
+				<div class="userManageTitle_View">
+					<img
+						src="${pageContext.request.contextPath}/assets/img/user/userMyPageImg/userMentoring.jpg"
+						alt="아이콘"> <span class="mentoringTitle">멘토링 관리</span>
+				</div>
+				<hr class="titleLine">
 
 				<div id="contentsMain">
 					<div id="mentoringBackground">
@@ -68,25 +63,20 @@
 										<span>학습 주제 및 목표</span>
 									</div>
 									<div class="subject">
-										<label for="mentoringSubject">학습 과목 번호</label>
-										<%-- subject -> subjectNumber 로 수정 --%>
-										<input type="text" id="mentoringSubject"
-											name="mentoringSubject" value="${mentoring.subjectNumber}"
-											readonly>
+										<label for="mentoringSubject">학습 과목 번호</label> <input
+											type="text" id="mentoringSubject"
+											value="${mentoring.subjectNumber}" readonly>
 									</div>
 
 									<div class="subject">
-										<label for="mentoringTitle">멘토링 주제</label>
-										<%-- title -> mentoringTitle 로 수정 --%>
-										<input type="text" id="mentoringTitle" name="mentoringTitle"
-											value="${mentoring.mentoringTitle}" readonly>
+										<label for="mentoringTitle">멘토링 주제</label> <input type="text"
+											id="mentoringTitle" value="${mentoring.mentoringTitle}"
+											readonly>
 									</div>
 
 									<div id="purpose">
 										<label for="mentoringPurpose">멘토링 목적</label>
-										<%-- purpose -> mentoringGoal 로 수정 --%>
-										<textarea id="mentoringPurpose" name="mentoringPurpose"
-											readonly>${mentoring.mentoringGoal}</textarea>
+										<textarea id="mentoringPurpose" readonly>${mentoring.mentoringGoal}</textarea>
 									</div>
 								</div>
 
@@ -95,52 +85,52 @@
 										<div>
 											<label for="mentoringCurriculum">멘토링 커리큘럼 상세</label>
 										</div>
-										<%-- curriculum -> mentoringDetail 로 수정 --%>
-										<textarea id="mentoringCurriculum" name="mentoringCurriculum"
-											readonly>${mentoring.mentoringDetail}</textarea>
+										<textarea id="mentoringCurriculum" readonly>${mentoring.mentoringDetail}</textarea>
 									</div>
 									<div id="file">
-										<div id="curriculumFileTitle">파일 첨부</div>
+										<div id="curriculumFileTitle">첨부 파일</div>
 										<div id="curriculumFile">
 											<c:choose>
-												<c:when test="${not empty mentoring.fileNumber}">
-													<%-- 현재 DTO에 파일 이름 필드가 따로 없다면 fileNumber를 출력하거나 
-                                                 Mapper에서 JOIN을 통해 파일명을 가져와야 합니다. --%>
-													<span>파일 번호: ${mentoring.fileNumber}</span>
+												<c:when test="${not empty mentoring.fileOriginalName}">
+													<a
+														href="${pageContext.request.contextPath}/download.file?fileName=${mentoring.fileOriginalName}"
+														style="color: #4f73e3; font-size: 13px;">
+														${mentoring.fileOriginalName} </a>
 												</c:when>
-												<c:otherwise>첨부된 파일이 없습니다.</c:otherwise>
+												<c:otherwise>
+													<span style="font-size: 12px; color: #888;">첨부된 파일이
+														없습니다.</span>
+												</c:otherwise>
 											</c:choose>
 										</div>
 									</div>
 								</div>
 							</div>
 
-							<div id="profile">
-								<a href="#"> <%-- 프로필 이미지는 현재 DTO에 없으므로 기본 이미지 노출 혹은 추후 추가 필요 --%>
-									<img
-									src="/upload/profile/${member.MEMBER_IMG != null ? member.MEMBER_IMG : 'default.png'}?t=<%=System.currentTimeMillis()%>"
-									alt="유저의 프로필 사진" id="profileDisplay"
-									onerror="this.onerror=null; this.src='${pageContext.request.contextPath}/assets/img/user/userProfile/default.png';">
-								</a>
-							</div>
 						</div>
 
+						<%-- 하단 버튼: Modify로 이동하거나 삭제 실행 --%>
+						<%-- 수정된 버튼 영역 --%>
 						<div id="buttons">
+							<%-- 1. type=modify 파라미터를 명확히 전달 --%>
 							<button type="button" id="modBtn"
-								onclick="location.href='${pageContext.request.contextPath}/mvc/auth/mentor/mentoring.my?type=modify&mentoringNumber=${mentoring.mentoringNumber}'">수정</button>
+								onclick="location.href='${pageContext.request.contextPath}/mvc/auth/mentor/mentoring.my?type=modify&mentoringNumber=${mentoring.mentoringNumber}'">
+								수정</button>
 
 							<button type="button" id="delBtn"
-								onclick="if(confirm('정말로 삭제하시겠습니까?')) { // mentoring.my로 보내되 type 파라미터를 넘김
-										location.href='${pageContext.request.contextPath}/mvc/auth/mentor/mentoring.my?type=deleteOk&mentoringNumber=${mentoring.mentoringNumber}'; }">삭제</button>
+								onclick="if(confirm('정말로 삭제하시겠습니까?')) { 
+            location.href='${pageContext.request.contextPath}/mvc/auth/mentor/mentoring.my?type=deleteOk&mentoringNumber=${mentoring.mentoringNumber}'; 
+        }">
+								삭제</button>
 						</div>
 					</div>
 				</div>
-			</form>
+			</div>
 		</main>
 	</div>
 
 	<footer>
-		<!-- <div class="footerContainer"></div> -->
+		<jsp:include page="/app/user/footer.jsp" />
 	</footer>
 </body>
 </html>

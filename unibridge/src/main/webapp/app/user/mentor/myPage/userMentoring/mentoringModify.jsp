@@ -127,15 +127,6 @@
 								</div>
 							</div>
 
-							<div id="profile">
-								<a href="#"> <img
-									src="${pageContext.request.contextPath}/assets/img/user/userProfile/userIcon.png"
-									alt="아이콘"> <img id="profileImg"
-									src="${pageContext.request.contextPath}/upload/${not empty mentoring.fileName ? mentoring.fileName : 'default.png'}"
-									onerror="this.src='${pageContext.request.contextPath}/assets/img/user/userProfile/ex1.png'"
-									alt="프로필">
-								</a>
-							</div>
 						</div>
 
 						<div id="buttons">
@@ -149,13 +140,5 @@
 	</div>
 
 	<jsp:include page="/app/user/footer.jsp" />
-	<script>
-		function deleteMentoring(internalId) {
-			if (confirm("정말로 이 멘토링을 삭제하시겠습니까?")) {
-				location.href = "${pageContext.request.contextPath}/mvc/auth/mentor/mentoringDeleteOk.my?mentoringNumber="
-						+ mentoringNumber;
-			}
-		}
-	</script>
 </body>
 </html>
