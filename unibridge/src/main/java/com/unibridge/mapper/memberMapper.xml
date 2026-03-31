@@ -62,7 +62,14 @@
 		AND member_pw = #{memberPw}
 		AND member_phone = #{memberPhone}
 	</select>
-
+	
+	<select id="checkMemberPendingKill" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+		FROM UB_MEMBER ub
+		WHERE ub.member_id = #{memberId}
+			AND ub.member_state = '계정 삭제'
+	</select>
+	
 	<!-- 회원삭제 -->
 	<delete id="deleteMember" parameterType="int">
 		DELETE FROM member

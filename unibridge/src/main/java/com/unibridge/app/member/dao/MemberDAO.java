@@ -15,7 +15,7 @@ public class MemberDAO {
     public MemberDAO() {
         sqlSession = MyBatisConfig.getSqlSessionFactory().openSession(true); // 자동 커밋 설정
     }
-
+    
     /**
      * 회원 로그인 정보와 일치하는 ID 존재 여부를 확인합니다.
      *
@@ -42,6 +42,11 @@ public class MemberDAO {
     public boolean checkMember(MemberDTO member) {
         Integer result = sqlSession.selectOne("member.checkMember", member);
         return result != null && result > 0;
+    }
+    
+    public boolean checkUserPendingKill(String memberId) {
+    	Integer result = sqlSession.selectOne("member.checkMemberPendingKill", memberId);
+    	return result != null && result > 0;
     }
     
     public Map<String, Object> selectMember(int memberNumber) {

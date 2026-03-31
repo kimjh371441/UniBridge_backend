@@ -45,6 +45,14 @@ public class SigninController implements Execute {
 		memberDTO.setMemberId(memberId);
 		memberDTO.setMemberPw(memberPw);
 		
+		boolean bIsUserPendingKill = memberDAO.checkUserPendingKill(memberId);
+		if (bIsUserPendingKill) {
+			request.setAttribute("loginError", "아이디 또는 비밀번호가 옳바르지 않습니다.");
+			outResult.setRedirect(false);
+			outResult.setPath("/app/user/signin/signin.jsp");
+			return;
+		}
+		
 		MemberDTO dtoResult = memberDAO.memberLogin(memberDTO);
 		if (dtoResult != null) {
 			/* 로그인 성공 */
