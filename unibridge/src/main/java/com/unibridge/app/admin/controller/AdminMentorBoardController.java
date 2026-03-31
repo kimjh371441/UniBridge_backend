@@ -36,14 +36,14 @@ public class AdminMentorBoardController implements Execute{
 
 		int startRow = (page - 1) * rowCount + 1;
 		int endRow = startRow + rowCount - 1;
-		Map<String, Integer> pageFilter = new HashMap<>();
-		pageFilter.put("startRow", startRow);
-		pageFilter.put("endRow", endRow);
+		Map<String, String> pageFilter = new HashMap<>();
+		pageFilter.put("startRow", Integer.toString(startRow));
+		pageFilter.put("endRow", Integer.toString(endRow));
 		
 		// 페이지 총 개수
 		int total = 0;
-		int dateFrom = 0;
-		int dateTo = 0;
+		String dateFrom = null;
+		String dateTo = null;
 
 
 		System.out.println("pageFilter : " + pageFilter);
@@ -51,10 +51,10 @@ public class AdminMentorBoardController implements Execute{
 		System.out.println("시작일 : "+request.getParameter("dateFrom")+ "종료일 : "+request.getParameter("dateTo"));
 
 		
-		if(request.getParameter("dateFrom") != null && request.getParameter("dateTo") != null && request.getParameter("dateFrom").length() == 8 && request.getParameter("dateTo").length() == 8) {
+		if(request.getParameter("dateFrom") != null && request.getParameter("dateTo") != null && request.getParameter("dateFrom").length() == 10 && request.getParameter("dateTo").length() == 10) {
 			System.out.println("--날짜 범위가 있는 경우--");
-			dateFrom = Integer.parseInt(request.getParameter("dateFrom"));
-			dateTo = Integer.parseInt(request.getParameter("dateTo"));
+			dateFrom = request.getParameter("dateFrom");
+			dateTo = request.getParameter("dateTo");
 			
 			pageFilter.put("dateFrom", dateFrom);
 			pageFilter.put("dateTo", dateTo);

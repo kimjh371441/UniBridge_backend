@@ -35,11 +35,30 @@
 		SELECT count(*) FROM
 		UB_MEMBER WHERE MEMBER_TYPE = 'MENTEE'
 	</select>
+	<!-- 멘티 게시글 갯수 -->
+	<select id="menteeboardtotal" resultType="int">
+		SELECT count(*) FROM UB_MENTEE_BOARD
+	</select>
+	
+	<!-- 멘토 게시글 갯수 -->
+	<select id="mentorboardtotal" resultType="int">
+		SELECT count(*) FROM UB_MENTOR_BOARD
+	</select>
+	
+	
+	<!-- 공지 게시글 갯수 -->
+	<select id="noticetotal" resultType="int">
+		SELECT count(*) FROM UB_NOTICEBOARD
+	</select>
+	
+
+
 	<!-- 현재 매칭 전체 -->
 	<select id="matchingtotal" resultType="int">
 		SELECT count(*) FROM
 		UB_MATCHING WHERE MATCHING_STATE = '매칭중'
 	</select>
+
 
 	<!-- 최신 게시판 -->
 	<select id="recentboard" resultType="AdMainDTO">
@@ -79,9 +98,7 @@
 	<select id="menteeGetRenderingTotal" resultType="int">
 		select count(*)
 		from UB_MENTEE_BOARD
-		WHERE board_date BETWEEN TO_DATE(#{dateFrom},
-		'YYYY-MM-DD') AND
-		TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+		WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 	</select>
 
 	<!-- 전체 조회 -->
@@ -119,8 +136,7 @@
 					FROM UB_MENTEE_BOARD umb
 					LEFT JOIN UB_MEMBER um ON um.MEMBER_NUMBER = umb.MEMBER_NUMBER 
 					LEFT JOIN UB_ADMIN UA ON umb.admin_number = ua.admin_number
-					WHERE board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD')
-					AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+					WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 					ORDER BY umb.MENTEEBOARD_NUMBER desc
 				) subquery
 			)WHERE rnum BETWEEN #{startRow} AND #{endRow}
@@ -204,9 +220,7 @@
 	<select id="mentorGetRenderingTotal" resultType="int">
 		select count(*)
 		from UB_MENTOR_BOARD
-		WHERE board_date BETWEEN TO_DATE(#{dateFrom},
-		'YYYY-MM-DD') AND
-		TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+		WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 	</select>
 
 	<!-- 전체 조회 -->
@@ -244,8 +258,7 @@
 					FROM UB_MENTOR_BOARD umb
 					LEFT JOIN UB_MEMBER um ON um.MEMBER_NUMBER = umb.MEMBER_NUMBER 
 					LEFT JOIN UB_ADMIN UA ON umb.admin_number = ua.admin_number
-					WHERE board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD')
-					AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+					WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 					ORDER BY umb.MENTORBOARD_NUMBER desc
 				) subquery
 			)WHERE rnum BETWEEN #{startRow} AND #{endRow}
@@ -339,13 +352,13 @@
 	<!-- 랜더링 조회 게시판 갯수 -->
 	<select id="noticeGetRenderingDateTypeTotal" resultType = "int">
 		select count(*) from UB_NOTICEBOARD 
-		WHERE board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD') AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+		WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 		AND BOARD_TYPE = #{boardType}
 	</select>
 	
 	<select id="noticeGetRenderingDateTotal" resultType = "int">
 		select count(*) from UB_NOTICEBOARD 
-		WHERE board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD') AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+		WHERE board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 	</select>
 	
 	<select id="noticeGetRenderingTypeTotal" resultType = "int">
@@ -377,7 +390,7 @@
 		        SELECT unb.*, ua.ADMIN_NICKNAME
 		        FROM UB_NOTICEBOARD unb
 		        LEFT JOIN UB_ADMIN ua ON unb.admin_number = ua.admin_number
-				WHERE unb.board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD') AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+				WHERE unb.board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 				AND unb.BOARD_TYPE = #{boardType}
 		        ORDER BY unb.NOTICEBOARD_NUMBER DESC
 		    ) subquery
@@ -393,7 +406,7 @@
 		        SELECT unb.*, ua.ADMIN_NICKNAME
 		        FROM UB_NOTICEBOARD unb
 		        LEFT JOIN UB_ADMIN ua ON unb.admin_number = ua.admin_number
-				WHERE unb.board_date BETWEEN TO_DATE(#{dateFrom}, 'YYYY-MM-DD') AND TO_DATE(#{dateTo}, 'YYYY-MM-DD')
+				WHERE unb.board_date BETWEEN TO_DATE(#{dateFrom} || '00:00:00' ,'YYYY-MM-DD' || 'HH24:MI:SS') AND TO_DATE(#{dateTo} || '23:59:59', 'YYYY-MM-DD' || 'HH24:MI:SS')
 		        ORDER BY unb.NOTICEBOARD_NUMBER DESC
 		    ) subquery
 		)WHERE rnum BETWEEN #{startRow} AND #{endRow}

@@ -22,8 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
   
   const btnSearch = document.getElementById("btnSearch");
   btnSearch.addEventListener("click", () => {
-        const dateFrom = Number(document.getElementById("dateFrom").value.replace(/-/g, ""));	//랜더링 시작일
-        const dateTo = Number(document.getElementById("dateTo").value.replace(/-/g, ""));	//랜더링 마지막일
+        const dateFrom = document.getElementById("dateFrom").value;	//랜더링 시작일
+        const dateTo = document.getElementById("dateTo").value
+		;	//랜더링 마지막일
 		
         if (dateFrom > dateTo) {
           alert("시작 날짜가 종료 날짜보다 클 수 없습니다.");

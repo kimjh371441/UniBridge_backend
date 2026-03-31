@@ -25,13 +25,13 @@ public class AdMenteeBoardDAO {
 	}
 
 	// 필터링 개수 조회
-	public int getRenderingTotal(Map<String, Integer> pagefilter) {
+	public int getRenderingTotal(Map<String, String> pagefilter) {
 		System.out.println("게시글 필터 후 개수 조회 - getRenderingTotal");
 		return sqlSession.selectOne("admin.menteeGetRenderingTotal", pagefilter);
 	}
 
 	// 멘티 게시판 전체 목록 확인
-	public List<AdMenteeBoardListDTO> selectAll(Map<String, Integer> pageRow) {
+	public List<AdMenteeBoardListDTO> selectAll(Map<String, String> pageRow) {
 		System.out.println("모든 게시글 조회하기");
 		List<AdMenteeBoardListDTO> list = sqlSession.selectList("admin.menteeSelectAll", pageRow);
 		System.out.println("조회 결과 " + list);
@@ -39,7 +39,7 @@ public class AdMenteeBoardDAO {
 	}
 
 	// 멘티 게시판 필터링 목록 확인
-	public List<AdMenteeBoardListDTO> selectFilter(Map<String, Integer> pagefilter) {
+	public List<AdMenteeBoardListDTO> selectFilter(Map<String, String> pagefilter) {
 		System.out.println("랜더링 게시글 조회하기 - selectFilter 메소드 실행 : " + pagefilter);
 		List<AdMenteeBoardListDTO> list = sqlSession.selectList("admin.menteeSelectFilter", pagefilter);
 		System.out.println("조회 결과 : " + list);
