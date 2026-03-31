@@ -28,7 +28,7 @@
 
       <!-- 오른쪽: 유저 정보 -->
       <div class="info-col">
-        <div class="info-name">홍길순</div>
+        <div class="info-name">${memberDetail.memberName}</div>
 
         <div class="info-type-row">
           유형 :
