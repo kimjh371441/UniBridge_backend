@@ -36,18 +36,8 @@
             <c:if test="${not empty payLog}">
     			<div class="userTypeBox">
 			        <div class="userText">
-			            <label>아이디</label>
-			            <label>${payLog.memberId}</label>
-			        </div>
-			
-			        <div class="userText">
-			            <label>이름</label>
+			            <label>멘토 이름</label>
 			            <label>${payLog.memberName}</label>
-			        </div>
-			
-			        <div class="userText">
-			            <label>계좌</label>
-			            <label>${payLog.matchingNumber}</label>
 			        </div>
 			
 			        <div class="userText">
