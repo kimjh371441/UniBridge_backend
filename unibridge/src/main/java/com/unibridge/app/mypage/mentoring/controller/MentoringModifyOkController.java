@@ -13,6 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
+import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.mentoring.dao.MentoringDAO;
 import com.unibridge.app.mypage.mentoring.dto.MentoringDTO;
 
@@ -41,8 +42,15 @@ public class MentoringModifyOkController implements Execute {
 			//기본 파라미터 수집
 			long mentoringNumber = Long.parseLong(multi.getParameter("mentoringNumber"));
 			HttpSession session = request.getSession();
-			long mentorNumber = Long.parseLong(String.valueOf(
-					session.getAttribute("memberNumber") != null ? session.getAttribute("memberNumber") : 21L));
+			MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+
+			if (loginUser == null) {
+			    result.setPath(request.getContextPath() + "/signin.mem");
+			    result.setRedirect(true);
+			    return result;
+			}
+
+			long mentorNumber = loginUser.getMemberNumber(); // 실제 로그인한 유저 번호 적용
 
 			// 파일 수정 로직
 			Enumeration<String> files = multi.getFileNames();

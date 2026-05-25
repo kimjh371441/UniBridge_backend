@@ -194,6 +194,10 @@ async function init() {
 	});
 	
 	function isDateInRange(targetDate, startDate = null, endDate = null) {
+	  targetDate = targetDate .replaceAll(".", "-");
+	  startDate	 = startDate ?.replaceAll(".", "-");
+	  endDate	 = endDate	 ?.replaceAll(".", "-"); 
+		
 	  const target = targetDate ? new Date(targetDate).getTime() : new Date().getTime();
 	  const start  = startDate  ? new Date(startDate).getTime()  : -Infinity;
 	  const end = endDate ? new Date(endDate).getTime() : Infinity;

@@ -13,6 +13,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.unibridge.app.Execute;
 import com.unibridge.app.Result;
+import com.unibridge.app.member.dto.MemberDTO;
 import com.unibridge.app.mypage.mentoring.dao.MentoringDAO;
 import com.unibridge.app.mypage.mentoring.dto.MentoringDTO;
 
@@ -28,8 +29,15 @@ public class MentoringWriteOkController implements Execute {
 		Result result = new Result();
 
 		HttpSession session = request.getSession();
-		Object loginUserObj = session.getAttribute("memberNumber");
-		long mentorNumber = Long.parseLong(String.valueOf(loginUserObj != null ? loginUserObj : 21L));
+		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+
+		if (loginUser == null) {
+		    result.setPath(request.getContextPath() + "/signin.mem");
+		    result.setRedirect(true);
+		    return result;
+		}
+
+		long mentorNumber = loginUser.getMemberNumber(); // 실제 로그인한 멘토 번호 추출
 
 		String uploadPath = request.getServletContext().getRealPath("/") + "upload/mentoring/";
 		int fileSizeLimit = 1024 * 1024 * 10; // 10MB
@@ -73,6 +81,8 @@ public class MentoringWriteOkController implements Execute {
 
 			// 5. 중복 체크 및 DB Insert
 			int existingCount = mentoringDAO.checkAlreadyExists(mentorNumber); //
+			System.out.println("[Log] 중복 등록 체크 결과 (기존 등록 수): " + existingCount);
+			
 			if (existingCount > 0) {
 				result.setPath(request.getContextPath() + "/mvc/auth/mentor/myPage.my?error=already_exists");
 				result.setRedirect(true);
@@ -80,17 +90,26 @@ public class MentoringWriteOkController implements Execute {
 			}
 
 			// DAO를 통해 DB 저장 실행
+			System.out.println("[Log] DB Insert 실행 직전 DTO 상태: " + mentoringDTO.toString());
 			mentoringDAO.insert(mentoringDTO); 
+			System.out.println("[Log] DB Insert 실행 완료 성공!");
 
-			// 성공 시 상세보기 페이지로 이동
+			// 등록된 멘토링 고유 번호 다시 조회
+			System.out.println("[Log] 멘토ID(" + mentorNumber + ")로 방금 등록된 멘토링 PK 조회 시도...");
 			long createdNumber = mentoringDTO.getMentoringNumber();
+			System.out.println("[Log] DB에서 최종 조회된 멘토링 PK 번호: " + createdNumber);
+			
+			// 성공 시 상세보기 페이지로 이동
 			result.setPath(request.getContextPath() + "/mvc/auth/mentor/mentoring.my?type=view&mentoringNumber="
 					+ createdNumber);
 			result.setRedirect(true);
+			System.out.println("[Log] 이동할 최종 Path: " + result.getPath());
 			return result;
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("[Critical Error] MentoringWriteOkController에서 예외가 터졌습니다!");
+			e.printStackTrace(); // 콘솔에 정확한 에러 원인(SQL 에러 등)을 출력합니다.
+			
 			result.setPath(request.getContextPath() + "/mvc/auth/mentor/myPage.my");
 			result.setRedirect(true);
 			return result;

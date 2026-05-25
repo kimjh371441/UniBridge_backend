@@ -114,10 +114,10 @@ function getProfileImageUrl(fileName) {
  */
 function createMentoCard(mentor) {
 	const cp = (typeof globalContextPath !== 'undefined') ? globalContextPath : '';
-	const mNum = mentor.id || mentor.memberNumber;
-
-	// 수정된 이미지 경로 추출 로직 적용
-	// mentor.fileName 또는 mentor.img 등 DB에서 넘어온 파일명 컬럼명을 사용하세요.
+	
+	// 안전하게 데이터 추출
+	const mentoringNum = mentor.mentoringNumber;
+	const memberNum = mentor.memberNumber;
 	const profileImgPath = getProfileImageUrl(mentor.fileName || mentor.img);
 
 	var html = '<div class="mentoInfo">';
@@ -127,8 +127,8 @@ function createMentoCard(mentor) {
 	html += '      <div class="mentoSubject">' + (mentor.subject || '전공미정') + '</div>';
 	html += '      <div class="mentoCardMain">';
 	html += '        <div class="mentoFront">';
-	html += '          <img src="' + profileImgPath + '" alt="멘토 프로필" onerror="this.src=\'' + cp + '/upload/profile/test.png\'">';
-	html += '          <button type="button" class="matching" data-id="' + mNum + '">매칭하기</button>';
+	html += '          <img src="' + profileImgPath + '" alt="멘토 프로필" onerror="this.src=\'' + cp + '/assets/img/user/userProfile/default.png\'">';
+	html += '          <button type="button" class="matching" data-mentoring-id="' + mentoringNum + '" data-member-id="' + memberNum + '">매칭하기</button>';
 	html += '        </div>';
 	html += '        <div class="mentoBack">';
 	html += '          <div class="mentoringPurpose">' + (mentor.purpose || '소개 없음') + '</div>';
@@ -224,18 +224,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// 5. [중요] 매칭하기 버튼 클릭 이벤트 (이벤트 위임)
 	// 버튼이 새로 생성되어도 부모 요소인 document에서 클릭을 가로챕니다.
-	document.addEventListener('click', function(e) {
-		if (e.target && e.target.classList.contains('matching')) {
-			const memberNumber = e.target.getAttribute('data-id');
-			const cp = (typeof globalContextPath !== 'undefined') ? globalContextPath : '';
-
-			if (!memberNumber || memberNumber === "undefined") {
-				alert("멘토 정보를 불러오지 못했습니다.");
-				return;
+	// 5. [수정] 매칭하기 버튼 클릭 이벤트
+		document.addEventListener('click', function(e) {
+			if (e.target && e.target.classList.contains('matching')) {
+				const memberNumber = e.target.getAttribute('data-member-id'); // 멘토 회원번호 추출
+				const mentoringNumber = e.target.getAttribute('data-mentoring-id'); // 멘토링 번호 추출
+				const cp = (typeof globalContextPath !== 'undefined') ? globalContextPath : '';
+				if (!memberNumber || memberNumber === "undefined") {
+					alert("멘토 정보를 불러오지 못했습니다.");
+					return;
+				}
+				console.log("[상세페이지 이동] 멘토 회원 번호:", memberNumber, " / 멘토링 번호:", mentoringNumber);
+				// 로그인 세션 및 기존 상세조회 로직이 memberNumber를 원본 키로 사용한다면 아래 코드를 유지하십시오.
+				location.href = cp + '/mentor/mentorDetailOk.sch?memberNumber=' + memberNumber;
 			}
-
-			console.log("[상세페이지 이동] 멘토 번호:", memberNumber);
-			location.href = cp + '/mentor/mentorDetailOk.sch?memberNumber=' + memberNumber;
-		}
-	});
+		});
 });

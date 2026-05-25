@@ -20,7 +20,8 @@
 	var REAL_MENTORS = [
 	    <c:forEach var="m" items="${mentorList}" varStatus="status">
 	    {
-	        id: "${m.memberNumber}",
+	        mentoringNumber: "${m.mentoringNumber}", // 게시글 고유 번호
+	        memberNumber: "${m.memberNumber}",       // 멘토 본인의 실제 회원 번호
 	        name: "${m.memberName}",
 	        university: "${m.gradSchool}",
 	        major: "${m.gradDepart}",

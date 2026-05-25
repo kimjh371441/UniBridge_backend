@@ -89,14 +89,16 @@
 										<textarea id="mentoringCurriculum" name="mentoringCurriculum"></textarea>
 									</div>
 									<div id="file">
-										<div id="curriculumFileTitle">커리큘럼 파일 첨부 (PDF, DOCX)</div>
-										<div class="file-upload-wrapper">
-											<input type="file" id="curriculumFile" name="mentoringFile"
-												accept=".pdf, .doc, .docx, .hwp" style="display: none;">
-											<button type="button" id="customFileBtn">파일 선택</button>
-											<span id="fileNameDisplay">선택된 파일이 없습니다.</span>
-										</div>
-										<p class="file-notice">* 10MB 이하의 PDF 또는 워드 파일만 업로드 가능합니다.</p>
+									    <div id="curriculumFileTitle">멘토 프로필 사진 등록</div>
+									    <div class="profile-upload-container">
+									        <!-- 클릭 시 파일 업로드가 트리거되는 이미지 박스 -->
+									        <div id="profilePreviewBox" onclick="document.getElementById('curriculumFile').click();" style="cursor: pointer; width: 150px; height: 150px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #f9f9f9; border-radius: 8px;">
+									            <img id="profilePreview" src="${pageContext.request.contextPath}/assets/img/user/userProfile/userIcon.png" alt="프로필 미리보기" style="width: 100%; height: 100%; object-fit: cover;">
+									        </div>
+									        <!-- accept를 이미지 파일만 허용하도록 변경 -->
+									        <input type="file" id="curriculumFile" name="mentoringFile" accept="image/*" style="display: none;" onchange="previewImage(this);">
+									        <p class="file-notice" style="margin-top: 8px; font-size: 12px; color: #888;">* 이미지를 클릭하면 사진을 변경할 수 있습니다.</p>
+									    </div>
 									</div>
 								</div>
 							</div>

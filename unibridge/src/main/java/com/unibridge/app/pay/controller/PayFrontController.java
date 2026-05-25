@@ -80,7 +80,22 @@ public class PayFrontController extends HttpServlet {
 	        // [수정 포인트] PaymentOkController 대신 PaymentFinishController 호출
 	        result = new PaymentFinishController().execute(request, response);
 	    }
-
+	    
+	    // 결제 강제 종료
+	    else if (target.contains("/paymentCancel.pay")) {
+	        System.out.println(">>> [사용자 취소] 결제창 강제 종료 혹은 취소 버튼 클릭");
+	        request.getSession().removeAttribute("tid");
+	        response.setContentType("text/html; charset=UTF-8");
+	        response.getWriter().print("<script>alert('결제가 취소되었습니다.'); location.href='" + contextPath + "/mentor/mentorSearchOk.sch';</script>");
+	    }
+	    // 결제 실패
+	    else if (target.contains("/paymentFail.pay")) {
+	        System.out.println(">>> [결제 실패] 시간 초과 또는 한도 초과 등");
+	        request.getSession().removeAttribute("tid");
+	        response.setContentType("text/html; charset=UTF-8");
+	        response.getWriter().print("<script>alert('결제 시간에 초과하였거나 실패했습니다.'); location.href='" + contextPath + "/mentor/mentorSearchOk.sch';</script>");
+	    }
+	    
 	    // 페이지 이동 처리
 	    if (result != null) {
 	        if (result.isRedirect()) {

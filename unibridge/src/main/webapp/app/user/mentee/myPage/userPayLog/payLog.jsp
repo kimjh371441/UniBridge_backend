@@ -49,6 +49,11 @@
 			            <label>결제번호</label>
 			            <label>${payLog.payId}</label>
 			        </div>
+			        
+			        <div class="userText">
+			            <label>결제상태</label>
+			            <label>${payLog.payStatus}</label>
+			        </div>
 			
 			        <div class="userText">
 			            <label>결제일</label>

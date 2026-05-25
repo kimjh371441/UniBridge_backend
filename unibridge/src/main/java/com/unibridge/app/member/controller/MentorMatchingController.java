@@ -120,7 +120,7 @@ public class MentorMatchingController implements Execute{
 
 			    // 3. DTO 객체 생성 및 데이터 세팅
 			    matchingDTO dto = new matchingDTO();
-			    dto.setMatchinNumber(matchingList.get(0).getMatchinNumber());
+			    dto.setMatchingNumber(matchingList.get(0).getMatchingNumber());
 			    dto.setMatchingCanReason(reason);
 			    
 			    // 4. DAO 호출하여 DB 업데이트

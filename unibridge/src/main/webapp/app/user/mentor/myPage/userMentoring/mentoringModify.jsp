@@ -103,22 +103,23 @@
 											required>${mentoring.mentoringDetail}</textarea>
 									</div>
 									<div id="file">
-										<div id="curriculumFileTitle">커리큘럼 파일 수정</div>
-										<div class="file-info-area">
-											<c:choose>
-												<c:when test="${not empty mentoring.fileOriginalName}">
-													<p>
-														현재 등록된 파일: <strong>${mentoring.fileOriginalName}</strong>
-													</p>
-												</c:when>
-												<c:otherwise>
-													<p>등록된 파일이 없습니다.</p>
-												</c:otherwise>
-											</c:choose>
-										</div>
-										<input type="file" id="curriculumFile" name="mentoringFile"
-											accept=".pdf, .doc, .docx">
-										<p class="file-notice">* 새로 업로드하면 기존 파일은 교체됩니다.</p>
+									    <div id="curriculumFileTitle">프로필 사진 수정</div>
+									    <div class="profile-upload-container">
+									        <div id="profilePreviewBox" onclick="document.getElementById('curriculumFile').click();" style="cursor: pointer; width: 150px; height: 150px; border: 2px dashed #ccc; display: flex; align-items: center; justify-content: center; overflow: hidden; background-color: #f9f9f9; border-radius: 8px;">
+									            <c:choose>
+									                <%-- 기존에 업로드된 이미지가 존재하면 서버에서 가져와 띄움 --%>
+									                <c:when test="${not empty mentoring.fileOriginalName}">
+									                    <img id="profilePreview" src="${pageContext.request.contextPath}/upload/mentoring/${mentoring.fileOriginalName}" alt="프로필 미리보기" style="width: 100%; height: 100%; object-fit: cover;">
+									                </c:when>
+									                <%-- 등록된 이미지가 없으면 기본 아이콘 표시 --%>
+									                <c:otherwise>
+									                    <img id="profilePreview" src="${pageContext.request.contextPath}/assets/img/user/userProfile/userIcon.png" alt="프로필 미리보기" style="width: 100%; height: 100%; object-fit: cover;">
+									                </c:otherwise>
+									            </c:choose>
+									        </div>
+									        <input type="file" id="curriculumFile" name="mentoringFile" accept="image/*" style="display: none;" onchange="previewImage(this);">
+									        <p class="file-notice" style="margin-top: 8px; font-size: 12px; color: #888;">* 이미지를 클릭하면 새로운 사진으로 교체됩니다.</p>
+									    </div>
 									</div>
 								</div>
 							</div>

@@ -2,6 +2,7 @@ package com.unibridge.app.mentorSearch.dto;
 
 public class MentorSearchDTO {
 
+	private int mentoringNumber; // 추가된 멘토링 번호
 	private int memberNumber;
 	private String memberId;
 	private String memberNickname;
@@ -16,8 +17,14 @@ public class MentorSearchDTO {
 	private String mentoringTitle;
 	private String mentoringGoal;
 
-	// getter, setter
-	
+	// 추가된 Getter / Setter
+	public int getMentoringNumber() {
+		return mentoringNumber;
+	}
+
+	public void setMentoringNumber(int mentoringNumber) {
+		this.mentoringNumber = mentoringNumber;
+	}
 	
 	public String getMemberName() {
 		return memberName;

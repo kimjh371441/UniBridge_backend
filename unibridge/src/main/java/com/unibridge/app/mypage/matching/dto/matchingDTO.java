@@ -10,13 +10,13 @@ public class matchingDTO {
 //    matching_cancel  DATE,
 //	matching_can_reason  VARCHAR2(1024)
 	
-	private int matchinNumber;
+	private int matchingNumber;
 	private String matchingStart;
 	private String matchingState;
 	private int mentorNumber;
 	private int menteeNumber;
 	private int subjectNumber;
-	private String matchinCancel;
+	private String matchingCancel;
 	private String mentorName;
     private String menteeName;
     private String subjectName;
@@ -83,11 +83,11 @@ public class matchingDTO {
 	public void setSubjectName(String subjectName) {
 		this.subjectName = subjectName;
 	}
-	public int getMatchinNumber() {
-		return matchinNumber;
+	public int getMatchingNumber() {
+		return matchingNumber;
 	}
-	public void setMatchinNumber(int matchinNumber) {
-		this.matchinNumber = matchinNumber;
+	public void setMatchingNumber(int matchinNumber) {
+		this.matchingNumber = matchinNumber;
 	}
 	public String getMatchingStart() {
 		return matchingStart;
@@ -119,18 +119,18 @@ public class matchingDTO {
 	public void setSubjectNumber(int subjectNumber) {
 		this.subjectNumber = subjectNumber;
 	}
-	public String getMatchinCancel() {
-		return matchinCancel;
+	public String getMatchingCancel() {
+		return matchingCancel;
 	}
-	public void setMatchinCancel(String matchinCancel) {
-		this.matchinCancel = matchinCancel;
+	public void setMatchingCancel(String matchinCancel) {
+		this.matchingCancel = matchinCancel;
 	}
 	
 	@Override
 	public String toString() {
-		return "matchingDTO [matchinNumber=" + matchinNumber + ", matchingStart=" + matchingStart + ", matchingState="
+		return "matchingDTO [matchinNumber=" + matchingNumber + ", matchingStart=" + matchingStart + ", matchingState="
 				+ matchingState + ", mentorNumber=" + mentorNumber + ", menteeNumber=" + menteeNumber
-				+ ", subjectNumber=" + subjectNumber + ", matchinCancel=" + matchinCancel + ", mentorName=" + mentorName
+				+ ", subjectNumber=" + subjectNumber + ", matchinCancel=" + matchingCancel + ", mentorName=" + mentorName
 				+ ", menteeName=" + menteeName + ", subjectName=" + subjectName + ", matchingCanReason="
 				+ matchingCanReason + ", payId=" + payId + ", payAmount=" + payAmount + ", payMethod=" + payMethod
 				+ ", payDate=" + payDate + ", payStatus=" + payStatus + "]";

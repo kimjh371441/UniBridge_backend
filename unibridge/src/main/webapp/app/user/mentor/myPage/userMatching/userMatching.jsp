@@ -68,23 +68,23 @@
 						</div>
 
 						<button type="button" class="matchingCancel"
-							onclick="openCancelModal('${matching.matchinNumber}')">매칭 취소 신청</button>
+							onclick="openCancelModal('${matching.matchingNumber}')">매칭 취소 신청</button>
 					</div>
 
 					<%-- 2. 매칭 취소 모달창 (카드 내 데이터와 동일하게 출력) --%>
-					<div id="matchingModal_${matching.matchinNumber}" class="matingCancel" style="display: none;">
+					<div id="matchingModal_${matching.matchingNumber}" class="matingCancel" style="display: none;">
 						<div class="cancelBox">
-							<button type="button" class="closeBtn" onclick="closeCancelModal('${matching.matchinNumber}')">
+							<button type="button" class="closeBtn" onclick="closeCancelModal('${matching.matchingNumber}')">
 								<img src="${pageContext.request.contextPath}/assets/img/user/userProfile/close.png" alt="닫기">
 							</button>
 							
 							<div class="cacelTitle">매칭 취소 신청서</div>
 							
 							<div class="cancelModalBox">
-								<form id="cancelForm_${matching.matchinNumber}" method="post"
+								<form id="cancelForm_${matching.matchingNumber}" method="post"
 									action="${pageContext.request.contextPath}/mvc/auth/mentor/matching.my">
 									
-									<input type="hidden" name="matchinNumber" value="${matching.matchinNumber}">
+									<input type="hidden" name="matchingNumber" value="${matching.matchingNumber}">
 
 									<div class="infoGrid">
 										<div class="printRow">
@@ -116,9 +116,9 @@
 
 									<div class="cancelFooter">
 										<button type="button" class="submitBtn"
-											onclick="submitCancel('${matching.matchinNumber}')">취소 신청</button>
+											onclick="submitCancel('${matching.matchingNumber}')">취소 신청</button>
 										<button type="button" class="cancelBtn"
-											onclick="closeCancelModal('${matching.matchinNumber}')">닫기</button>
+											onclick="closeCancelModal('${matching.matchingNumber}')">닫기</button>
 									</div>
 								</form>
 							</div>

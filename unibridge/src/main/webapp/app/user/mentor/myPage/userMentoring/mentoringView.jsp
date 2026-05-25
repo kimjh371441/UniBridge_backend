@@ -88,21 +88,19 @@
 										<textarea id="mentoringCurriculum" readonly>${mentoring.mentoringDetail}</textarea>
 									</div>
 									<div id="file">
-										<div id="curriculumFileTitle">첨부 파일</div>
-										<div id="curriculumFile">
-											<c:choose>
-												<c:when test="${not empty mentoring.fileOriginalName}">
-													<a
-														href="${pageContext.request.contextPath}/download.file?fileName=${mentoring.fileOriginalName}"
-														style="color: #4f73e3; font-size: 13px;">
-														${mentoring.fileOriginalName} </a>
-												</c:when>
-												<c:otherwise>
-													<span style="font-size: 12px; color: #888;">첨부된 파일이
-														없습니다.</span>
-												</c:otherwise>
-											</c:choose>
-										</div>
+									    <div id="curriculumFileTitle">멘토 프로필 사진</div>
+									    <div id="curriculumFile" style="margin-top: 10px;">
+									        <c:choose>
+									            <c:when test="${not empty mentoring.fileOriginalName}">
+									                <div style="width: 150px; height: 150px; border: 1px solid #ddd; overflow: hidden; border-radius: 8px;">
+									                    <img src="${pageContext.request.contextPath}/upload/mentoring/${mentoring.fileOriginalName}" alt="멘토 프로필" style="width: 100%; height: 100%; object-fit: cover;">
+									                </div>
+									            </c:when>
+									            <c:otherwise>
+									                <span style="font-size: 12px; color: #888;">등록된 프로필 사진이 없습니다.</span>
+									            </c:otherwise>
+									        </c:choose>
+									    </div>
 									</div>
 								</div>
 							</div>

@@ -69,6 +69,17 @@ public class MatchingController implements Execute{
 	        }else {
 	        	outResult.setPath("/app/user/mentee/myPage/userMatching/nonMatching.jsp"); 	        		        	
 	        }
+	    } else if(matchingList.get(0).getMatchingState().equals("요청 처리 중")){
+	    	
+	    	System.out.println("매칭 취소 요청 처리 중 : 안내 페이지로 이동");
+	    	System.out.println("현재 상태 : " + matchingList.toString());
+	    	
+	    	if(loginUser.getMemberType().equals("MENTOR")) {
+	        	outResult.setPath("/app/user/mentor/myPage/userMatching/userMatchingCancel.jsp"); 	        	
+	        }else {
+	        	outResult.setPath("/app/user/mentee/myPage/userMatching/userMatchingCancel.jsp"); 	        		        	
+	        }
+	    	
 	    } else {
 	        System.out.println("조회된 매칭 수: " + matchingList.size());
 	        for(matchingDTO str : matchingList) {
@@ -121,7 +132,7 @@ public class MatchingController implements Execute{
 
 			    // 3. DTO 객체 생성 및 데이터 세팅
 			    matchingDTO dto = new matchingDTO();
-			    dto.setMatchinNumber(matchingList.get(0).getMatchinNumber());
+			    dto.setMatchingNumber(matchingList.get(0).getMatchingNumber());
 			    dto.setMatchingCanReason(reason);
 			    
 			    // 4. DAO 호출하여 DB 업데이트

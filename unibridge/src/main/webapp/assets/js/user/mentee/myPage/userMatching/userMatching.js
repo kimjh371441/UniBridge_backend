@@ -9,8 +9,8 @@ function openCancelModal(matchNum) {
     const modal = document.getElementById('matchingModal_' + matchNum);
     
     if (modal) {
-        // 배경을 포함한 모달 전체를 화면에 표시
-        modal.style.display = "flex"; 
+		// [수정] 중앙 정렬 flex 레이아웃이 유지되도록 block 대신 flex로 변경
+		modal.style.display = "flex";
     } else {
         console.error("해당 모달을 찾을 수 없습니다: matchingModal_" + matchNum);
     }
@@ -54,17 +54,17 @@ function submitCancel(matchNum) {
         form.method = 'POST';
         form.action = contextPath + "/mvc/auth/mentee/matching.my"; 
 
-        // 데이터 1: 매칭 번호 추가
+		// 데이터 1: 매칭 번호 추가
         const numInput = document.createElement('input');
         numInput.type = 'hidden';
-        numInput.name = 'matchinNumber'; 
+        numInput.name = 'matchingNumber'; 
         numInput.value = matchNum;
         form.appendChild(numInput);
 
-        // 데이터 2: 취소 사유 추가 (이게 꼭 들어가야 DB에 저장됩니다!)
+		// 데이터 2: 취소 사유 추가
         const reasonInput = document.createElement('input');
         reasonInput.type = 'hidden';
-        reasonInput.name = 'matchingCanReason'; // 컨트롤러의 getParameter와 일치
+        reasonInput.name = 'matchingCanReason'; 
         reasonInput.value = reason;
         form.appendChild(reasonInput);
 

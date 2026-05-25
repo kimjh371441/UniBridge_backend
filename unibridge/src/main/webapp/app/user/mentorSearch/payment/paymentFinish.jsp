@@ -63,7 +63,21 @@
 					</div>
 
 					<div id="payStatus">
-						상태: <span style="font-weight: bold; color: blue;">${payInfo.payStatus}</span>
+					    상태: 
+					    <c:choose>
+					        <c:when test="${payInfo.payStatus == '결제완료'}">
+					            <span style="font-weight: bold; color: blue;">${payInfo.payStatus}</span>
+					        </c:when>
+					        <c:when test="${payInfo.payStatus == '결제대기'}">
+					            <span style="font-weight: bold; color: gray;">${payInfo.payStatus}</span>
+					        </c:when>
+					        <c:when test="${payInfo.payStatus == '취소신청'}">
+					            <span style="font-weight: bold; color: orange;">${payInfo.payStatus}</span>
+					        </c:when>
+					        <c:when test="${payInfo.payStatus == '취소완료'}">
+					            <span style="font-weight: bold; color: red;">${payInfo.payStatus}</span>
+					        </c:when>
+					    </c:choose>
 					</div>
 				</div>
 			</div>
